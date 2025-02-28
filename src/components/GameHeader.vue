@@ -1,6 +1,6 @@
 <template>
 <header>
-    <h1> CollaBlind</h1>
+    <h1>CollaBlind</h1>
 </header>
 </template>
 
