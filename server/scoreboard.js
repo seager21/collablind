@@ -1,4 +1,4 @@
-const express = require('express')
+import express from 'express'
 const router = express.Router()
 
 let scoreboard = []
@@ -17,4 +17,4 @@ router.post('/scoreboard', (req, res) => {
   }
 })
 
-module.exports = router
+export default router
