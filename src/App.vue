@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
+import axios from 'axios'
 import GameGrid from './components/GameGrid.vue'
 import ScoreBoard from './components/ScoreBoard.vue'
 import RestartButton from './components/RestartButton.vue'
@@ -11,6 +12,7 @@ const attempts = ref(3)
 const streak = ref(0)
 const guesses = ref(0)
 const gridSize = ref(2)
+const scoreboard = ref([])
 
 const increaseScore = () => {
   score.value += 1
@@ -42,6 +44,28 @@ const restartGame = () => {
   guesses.value = 0
   gridSize.value = 2
 }
+
+const fetchScoreboard = async () => {
+  try {
+    const response = await axios.get('/api/scoreboard')
+    scoreboard.value = response.data
+  } catch (error) {
+    console.error('Error fetching scoreboard:', error)
+  }
+}
+
+const submitScore = async (playerName: string) => {
+  try {
+    await axios.post('/api/scoreboard', { playerName, score: score.value })
+    await fetchScoreboard() // Refresh scoreboard after submission
+  } catch (error) {
+    console.error('Error submitting score:', error)
+  }
+}
+
+onMounted(() => {
+  fetchScoreboard()
+})
 </script>
 
 <template>
@@ -50,6 +74,14 @@ const restartGame = () => {
     <ScoreBoard :score="score" :attempts="attempts" :streak="streak" />
     <GameGrid :gridSize="gridSize" @correct="increaseScore" @wrong="decreaseAttempts" />
     <RestartButton @restart="restartGame" />
+    <div class="scoreboard">
+      <h2>Scoreboard</h2>
+      <ul>
+        <li v-for="entry in scoreboard" :key="entry.id">
+          {{ entry.playerName }}: {{ entry.score }}
+        </li>
+      </ul>
+    </div>
   </div>
   <GameFooter />
 </template>
@@ -81,5 +113,10 @@ const restartGame = () => {
     place-items: flex-start;
     flex-wrap: wrap;
   }
+}
+
+.scoreboard {
+  margin-top: 20px;
+  text-align: center;
 }
 </style>
