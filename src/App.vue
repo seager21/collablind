@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import MainMenu from './components/MainMenu.vue'
 import GameGrid from './components/GameGrid.vue'
 import ScoreBoard from './components/ScoreBoard.vue'
 import RestartButton from './components/RestartButton.vue'
@@ -11,6 +12,18 @@ const attempts = ref(3)
 const streak = ref(0)
 const guesses = ref(0)
 const gridSize = ref(2)
+const showMainMenu = ref(true)
+const showScoreboard = ref(false)
+
+const startGame = () => {
+  showMainMenu.value = false
+  showScoreboard.value = false
+}
+
+const viewScoreboard = () => {
+  showMainMenu.value = false
+  showScoreboard.value = true
+}
 
 const increaseScore = () => {
   score.value += 1
@@ -47,9 +60,17 @@ const restartGame = () => {
 <template>
   <GameHeader />
   <div class="game-container">
-    <ScoreBoard :score="score" :attempts="attempts" :streak="streak" />
-    <GameGrid :gridSize="gridSize" @correct="increaseScore" @wrong="decreaseAttempts" />
-    <RestartButton @restart="restartGame" />
+    <MainMenu v-if="showMainMenu" @start-game="startGame" @view-scoreboard="viewScoreboard" />
+    <div v-else-if="showScoreboard">
+      <h2>Scoreboard</h2>
+      <!-- Add your scoreboard content here -->
+      <button @click="showMainMenu = true">Back to Main Menu</button>
+    </div>
+    <div v-else>
+      <ScoreBoard :score="score" :attempts="attempts" :streak="streak" />
+      <GameGrid :gridSize="gridSize" @correct="increaseScore" @wrong="decreaseAttempts" />
+      <RestartButton @restart="restartGame" />
+    </div>
   </div>
   <GameFooter />
 </template>
