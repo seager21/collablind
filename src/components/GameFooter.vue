@@ -1,25 +1,29 @@
 <template>
-    <footer>
-        <p>Follow & Subscribe</p>
-        <div class="social-links">
+  <footer>
+    <p>Follow & Subscribe</p>
+    <div class="social-links">
       <a href="https://x.com/thekarpaoff" target="_blank"><i class="fab fa-twitter"></i></a>
       <a href="https://instagram.com/the.karpa" target="_blank"><i class="fab fa-instagram"></i></a>
     </div>
-    </footer>
-    </template>
-    
-    <style lang="scss" scoped>
-    footer{
-        width: 100%;
-    text-align: center;
-    background: rgba(0, 0, 0, 0.7);
-    color: white;
-    font-size: 1.2rem;
-     position: absolute;
-     bottom: 0;
-    }
-    
-    .social-links {
+  </footer>
+</template>
+
+<style lang="scss" scoped>
+footer {
+  width: 100%;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  font-size: 1.2rem;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+  height: 60px;
+  line-height: 60px;
+}
+
+.social-links {
   margin-top: 5px;
 
   a {
@@ -32,5 +36,5 @@
       color: #ff77ff;
     }
   }
-} 
-    </style>
+}
+</style>

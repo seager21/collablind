@@ -61,12 +61,12 @@ const restartGame = () => {
   <GameHeader />
   <div class="game-container">
     <MainMenu v-if="showMainMenu" @start-game="startGame" @view-scoreboard="viewScoreboard" />
-    <div v-else-if="showScoreboard">
+    <div v-else-if="showScoreboard" class="scoreboard-view">
       <h2>Scoreboard</h2>
       <!-- Add your scoreboard content here -->
       <button @click="showMainMenu = true">Back to Main Menu</button>
     </div>
-    <div v-else>
+    <div v-else class="game-content-center">
       <ScoreBoard :score="score" :attempts="attempts" :streak="streak" />
       <GameGrid :gridSize="gridSize" @correct="increaseScore" @wrong="decreaseAttempts" />
       <RestartButton @restart="restartGame" />
@@ -82,10 +82,27 @@ const restartGame = () => {
   align-items: center;
   justify-content: center;
   width: 100vw;
-  height: calc(100vh - 120px); /* Adjust height to account for fixed header and footer */
-  margin-top: 60px; /* Space for fixed header */
-  margin-bottom: 60px; /* Space for fixed footer */
-  background: url('/vaporwave.gif') center/cover no-repeat;
+  height: calc(100vh - 120px); /* 60px header + 60px footer */
+  margin-top: 60px;
+  margin-bottom: 60px;
+}
+
+.scoreboard-view {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.game-content-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
 }
 
 @media (min-width: 1024px) {

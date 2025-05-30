@@ -1,11 +1,11 @@
 <template>
-<header>
+  <header>
     <h1>CollaBlind</h1>
-</header>
+  </header>
 </template>
 
 <style lang="scss" scoped>
-header{
+header {
   width: 100%;
   text-align: center;
   background: rgba(0, 0, 0, 0.7);
@@ -13,7 +13,11 @@ header{
   font-size: 1.8rem;
   font-weight: bold;
   text-transform: uppercase;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  height: 60px;
+  line-height: 60px;
 }
-
-
 </style>
