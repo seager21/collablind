@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch, onMounted, onUnmounted } from 'vue'
 import MainMenu from './components/MainMenu.vue'
 import GameGrid from './components/GameGrid.vue'
 import ScoreBoard from './components/ScoreBoard.vue'
 import RestartButton from './components/RestartButton.vue'
 import GameHeader from './components/GameHeader.vue'
 import GameFooter from './components/GameFooter.vue'
+
 
 const score = ref(0)
 const attempts = ref(3)
@@ -15,9 +16,19 @@ const gridSize = ref(2)
 const showMainMenu = ref(true)
 const showScoreboard = ref(false)
 
+// Timer logic
+const timeLeft = ref(15)
+const timerActive = ref(false)
+let timerInterval: number | null = null
+
+const showGameOver = ref(false)
+
 const startGame = () => {
   showMainMenu.value = false
   showScoreboard.value = false
+  showGameOver.value = false
+  timeLeft.value = 15
+  timerActive.value = true
 }
 
 const viewScoreboard = () => {
@@ -35,6 +46,11 @@ const increaseScore = () => {
     attempts.value += 1
   }
 
+  // Every 5 consecutive correct guesses, add 5 seconds
+  if (streak.value > 0 && streak.value % 5 === 0) {
+    timeLeft.value += 5
+  }
+
   // Increase grid size every 15 guesses (max 10x10)
   if (guesses.value % 15 === 0 && gridSize.value < 10) {
     gridSize.value += 1
@@ -45,6 +61,9 @@ const decreaseAttempts = () => {
   if (attempts.value > 0) {
     attempts.value -= 1
     streak.value = 0 // Reset streak on incorrect guess
+    if (attempts.value === 0) {
+      endGame()
+    }
   }
 }
 
@@ -54,7 +73,38 @@ const restartGame = () => {
   streak.value = 0
   guesses.value = 0
   gridSize.value = 2
+  timeLeft.value = 15
+  timerActive.value = false
+  showGameOver.value = false
+  showMainMenu.value = true
 }
+
+function endGame() {
+  timerActive.value = false
+  showGameOver.value = true
+}
+
+// Timer effect
+onMounted(() => {
+  watch(timerActive, (active) => {
+    if (active) {
+      if (timerInterval) clearInterval(timerInterval)
+      timerInterval = setInterval(() => {
+        if (timerActive.value && timeLeft.value > 0) {
+          timeLeft.value--
+          if (timeLeft.value === 0) {
+            endGame()
+          }
+        }
+      }, 1000) as unknown as number
+    } else {
+      if (timerInterval) clearInterval(timerInterval)
+    }
+  }, { immediate: true })
+})
+onUnmounted(() => {
+  if (timerInterval) clearInterval(timerInterval)
+})
 </script>
 
 <template>
@@ -67,15 +117,26 @@ const restartGame = () => {
       <button @click="showMainMenu = true">Back to Main Menu</button>
     </div>
     <div v-else class="game-content-center">
+      <div class="timer" v-if="timerActive">Time Left: {{ timeLeft }}s</div>
       <ScoreBoard :score="score" :attempts="attempts" :streak="streak" />
-      <GameGrid :gridSize="gridSize" @correct="increaseScore" @wrong="decreaseAttempts" />
+      <GameGrid :gridSize="gridSize" @correct="increaseScore" @wrong="decreaseAttempts" :disabled="showGameOver" />
       <RestartButton @restart="restartGame" />
+      <GameOverModal v-if="showGameOver" :score="score" @restart="restartGame" />
     </div>
   </div>
   <GameFooter />
+
+<!-- Modal component import -->
 </template>
 
 <style scoped>
+.timer {
+  font-size: 2rem;
+  color: #ff00ff;
+  margin-bottom: 1rem;
+  font-family: 'Press Start 2P', cursive;
+  text-shadow: 0 2px 8px #000a;
+}
 .game-container {
   display: flex;
   flex-direction: column;
