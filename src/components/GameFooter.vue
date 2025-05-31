@@ -1,6 +1,5 @@
 <template>
   <footer>
-    <button class="bg-arrow" @click="onPrevBg" aria-label="Previous background">&#8592;</button>
     <span class="footer-center">
       <p>Follow & Subscribe</p>
       <div class="social-links">
@@ -10,6 +9,8 @@
         ></a>
       </div>
     </span>
+    <span class="bg-label">Background</span>
+    <button class="bg-arrow" @click="onPrevBg" aria-label="Previous background">&#8592;</button>
     <button class="bg-arrow" @click="onNextBg" aria-label="Next background">&#8594;</button>
   </footer>
 </template>
@@ -76,7 +77,40 @@ footer {
     }
   }
 }
+
+.bg-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 1rem;
+}
+.bg-label {
+  font-size: 0.85rem;
+  color: #ff00ff;
+  margin-bottom: 0px;
+  letter-spacing: 1px;
+}
+
+@media (max-width: 768px) {
+  footer {
+    font-size: 0.9rem;
+    padding: 0 0.5rem;
+    height: auto;
+  }
+  .bg-arrow {
+    font-size: 1.5rem;
+    padding: 0 0.5rem;
+  }
+  .footer-center p {
+    padding-top: 1vw;
+    font-size: 0.95rem;
+  }
+  .social-links a {
+    font-size: 1.1rem;
+    margin: 0 5px;
+  }
+  .bg-label {
+    font-size: 0.7rem;
+  }
+}
 </style>
-@media (max-width: 768px) { footer { font-size: 0.9rem; height: 50px; padding: 0 0.5rem; } .bg-arrow
-{ font-size: 1.5rem; padding: 0 0.5rem; } .footer-center p { padding-top: 1vw; font-size: 0.95rem; }
-.social-links a { font-size: 1.1rem; margin: 0 5px; } }

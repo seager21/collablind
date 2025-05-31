@@ -20,6 +20,14 @@ header {
   height: 60px;
   line-height: 60px;
 }
+@media (max-width: 768px) {
+  header {
+    font-size: 1.1rem;
+    height: 50px;
+    line-height: 50px;
+  }
+  header h1 {
+    font-size: 1.2rem;
+  }
+}
 </style>
-@media (max-width: 768px) { header { font-size: 1.1rem; height: 50px; line-height: 50px; } header h1
-{ font-size: 1.2rem; } }

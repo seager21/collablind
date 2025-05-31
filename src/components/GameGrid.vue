@@ -69,6 +69,16 @@ function lightenColor(rgb: string, percent: number) {
 .grid-item:hover {
   transform: scale(1.1);
 }
+
+@media (max-width: 768px) {
+  .grid {
+    width: 95vw;
+    max-width: 95vw;
+    gap: 2vw;
+    margin: 10px auto;
+  }
+  .grid-item {
+    border-radius: 3px;
+  }
+}
 </style>
-@media (max-width: 768px) { .grid { width: 95vw; max-width: 95vw; gap: 2vw; margin: 10px auto; }
-.grid-item { border-radius: 3px; } }

@@ -21,5 +21,11 @@ button {
 button:hover {
   background: #ff77ff;
 }
+@media (max-width: 768px) {
+  button {
+    font-size: 0.95rem;
+    padding: 8px 12px;
+    margin-top: 12px;
+  }
+}
 </style>
-@media (max-width: 768px) { button { font-size: 0.95rem; padding: 8px 12px; margin-top: 12px; } }
