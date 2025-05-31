@@ -7,7 +7,6 @@ import RestartButton from './components/RestartButton.vue'
 import GameHeader from './components/GameHeader.vue'
 import GameFooter from './components/GameFooter.vue'
 
-
 const score = ref(0)
 const attempts = ref(3)
 const streak = ref(0)
@@ -86,21 +85,25 @@ function endGame() {
 
 // Timer effect
 onMounted(() => {
-  watch(timerActive, (active) => {
-    if (active) {
-      if (timerInterval) clearInterval(timerInterval)
-      timerInterval = setInterval(() => {
-        if (timerActive.value && timeLeft.value > 0) {
-          timeLeft.value--
-          if (timeLeft.value === 0) {
-            endGame()
+  watch(
+    timerActive,
+    (active) => {
+      if (active) {
+        if (timerInterval) clearInterval(timerInterval)
+        timerInterval = setInterval(() => {
+          if (timerActive.value && timeLeft.value > 0) {
+            timeLeft.value--
+            if (timeLeft.value === 0) {
+              endGame()
+            }
           }
-        }
-      }, 1000) as unknown as number
-    } else {
-      if (timerInterval) clearInterval(timerInterval)
-    }
-  }, { immediate: true })
+        }, 1000) as unknown as number
+      } else {
+        if (timerInterval) clearInterval(timerInterval)
+      }
+    },
+    { immediate: true },
+  )
 })
 onUnmounted(() => {
   if (timerInterval) clearInterval(timerInterval)
@@ -119,14 +122,19 @@ onUnmounted(() => {
     <div v-else class="game-content-center">
       <div class="timer" v-if="timerActive">Time Left: {{ timeLeft }}s</div>
       <ScoreBoard :score="score" :attempts="attempts" :streak="streak" />
-      <GameGrid :gridSize="gridSize" @correct="increaseScore" @wrong="decreaseAttempts" :disabled="showGameOver" />
+      <GameGrid
+        :gridSize="gridSize"
+        @correct="increaseScore"
+        @wrong="decreaseAttempts"
+        :disabled="showGameOver"
+      />
       <RestartButton @restart="restartGame" />
       <GameOverModal v-if="showGameOver" :score="score" @restart="restartGame" />
     </div>
   </div>
   <GameFooter />
 
-<!-- Modal component import -->
+  <!-- Modal component import -->
 </template>
 
 <style scoped>
