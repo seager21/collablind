@@ -70,3 +70,5 @@ function lightenColor(rgb: string, percent: number) {
   transform: scale(1.1);
 }
 </style>
+@media (max-width: 768px) { .grid { width: 95vw; max-width: 95vw; gap: 2vw; margin: 10px auto; }
+.grid-item { border-radius: 3px; } }

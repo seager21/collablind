@@ -49,3 +49,6 @@ button:hover {
   background: #ff77ff;
 }
 </style>
+@media (max-width: 768px) { .modal-content { padding: 1rem 0.5rem; font-size: 1rem; width: 90vw;
+min-width: unset; } h2 { font-size: 1.2rem; } p { font-size: 1rem; } button { font-size: 1rem;
+padding: 8px 16px; } }

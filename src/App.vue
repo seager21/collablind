@@ -6,6 +6,36 @@ import ScoreBoard from './components/ScoreBoard.vue'
 import RestartButton from './components/RestartButton.vue'
 import GameHeader from './components/GameHeader.vue'
 import GameFooter from './components/GameFooter.vue'
+import GameOverModal from './components/GameOverModal.vue'
+// Background GIFs
+const backgrounds = ref<string[]>(['/vaporwave.gif']) // Will be loaded from JSON
+const currentBgIndex = ref(0)
+
+function setBackground(index: number) {
+  if (backgrounds.value.length === 0) return
+  currentBgIndex.value = (index + backgrounds.value.length) % backgrounds.value.length
+  document.body.style.backgroundImage = `url('${backgrounds.value[currentBgIndex.value]}')`
+  document.body.style.backgroundSize = 'cover'
+  document.body.style.backgroundRepeat = 'no-repeat'
+  document.body.style.backgroundPosition = 'center center'
+}
+
+function nextBackground() {
+  setBackground(currentBgIndex.value + 1)
+}
+function prevBackground() {
+  setBackground(currentBgIndex.value - 1)
+}
+
+onMounted(async () => {
+  try {
+    const res = await fetch('/src/assets/backgrounds.json')
+    if (res.ok) {
+      backgrounds.value = await res.json()
+    }
+  } catch {}
+  setBackground(0)
+})
 
 const score = ref(0)
 const attempts = ref(3)
@@ -132,7 +162,7 @@ onUnmounted(() => {
       <GameOverModal v-if="showGameOver" :score="score" @restart="restartGame" />
     </div>
   </div>
-  <GameFooter />
+  <GameFooter :onNextBg="nextBackground" :onPrevBg="prevBackground" />
 
   <!-- Modal component import -->
 </template>
@@ -154,6 +184,7 @@ onUnmounted(() => {
   height: calc(100vh - 120px); /* 60px header + 60px footer */
   margin-top: 60px;
   margin-bottom: 60px;
+  /* background is now set on body via JS */
 }
 
 .scoreboard-view {
@@ -190,3 +221,6 @@ onUnmounted(() => {
   }
 }
 </style>
+@media (max-width: 768px) { .game-container { margin-top: 50px; margin-bottom: 50px; height:
+calc(100vh - 100px); padding: 0 4vw; } .scoreboard-view, .game-content-center { padding: 0 2vw;
+font-size: 1rem; } .timer { font-size: 1.2rem; } }

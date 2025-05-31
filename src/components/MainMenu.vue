@@ -42,3 +42,6 @@ defineEmits(['start-game', 'view-scoreboard'])
   }
 }
 </style>
+@media (max-width: 768px) { .main-menu { height: 100vh; padding: 0 2vw; } .main-menu h1 { font-size:
+1.3rem; margin-bottom: 12px; } .main-menu button { font-size: 1rem; padding: 8px 12px; margin: 6px
+0; } }
