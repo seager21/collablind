@@ -66,8 +66,11 @@ function lightenColor(rgb: string, percent: number) {
   transition: transform 0.1s;
 }
 
-.grid-item:hover {
-  transform: scale(1.1);
+/* Only scale on hover for non-touch devices */
+@media (hover: hover) and (pointer: fine) {
+  .grid-item:hover {
+    transform: scale(1.1);
+  }
 }
 
 @media (max-width: 768px) {

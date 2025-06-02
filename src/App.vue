@@ -181,10 +181,12 @@ onUnmounted(() => {
   align-items: center;
   justify-content: center;
   width: 100vw;
+  max-width: 100vw;
   height: calc(100vh - 120px); /* 60px header + 60px footer */
   margin-top: 60px;
   margin-bottom: 60px;
   /* background is now set on body via JS */
+  overflow-x: hidden;
 }
 
 .scoreboard-view {
