@@ -23,7 +23,8 @@ defineEmits(['start-game', 'view-scoreboard'])
 
   h1 {
     font-size: 2.5rem;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
+    color: black;
   }
 
   button {
@@ -48,7 +49,7 @@ defineEmits(['start-game', 'view-scoreboard'])
   }
   .main-menu h1 {
     font-size: 1.3rem;
-    margin-bottom: 12px;
+    margin-bottom: 30px;
   }
   .main-menu button {
     font-size: 1rem;
