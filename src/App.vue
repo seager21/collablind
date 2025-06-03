@@ -7,25 +7,10 @@ import RestartButton from './components/RestartButton.vue'
 import GameHeader from './components/GameHeader.vue'
 import GameFooter from './components/GameFooter.vue'
 import GameOverModal from './components/GameOverModal.vue'
-// Background GIFs
-const backgrounds = ref<string[]>(['/vaporwave.gif']) // Will be loaded from JSON
-const currentBgIndex = ref(0)
-
-function setBackground(index: number) {
-  if (backgrounds.value.length === 0) return
-  currentBgIndex.value = (index + backgrounds.value.length) % backgrounds.value.length
-  document.body.style.backgroundImage = `url('${backgrounds.value[currentBgIndex.value]}')`
-  document.body.style.backgroundSize = 'cover'
-  document.body.style.backgroundRepeat = 'no-repeat'
-  document.body.style.backgroundPosition = 'center center'
-}
-
-function nextBackground() {
-  setBackground(currentBgIndex.value + 1)
-}
-function prevBackground() {
-  setBackground(currentBgIndex.value - 1)
-}
+import GifBanner from './components/GifBanner.vue'
+import LoadingScreen from './components/LoadingScreen.vue'
+const backgrounds = ref<string[]>([])
+const showLoading = ref(false)
 
 onMounted(async () => {
   try {
@@ -34,7 +19,6 @@ onMounted(async () => {
       backgrounds.value = await res.json()
     }
   } catch {}
-  setBackground(0)
 })
 
 const score = ref(0)
@@ -53,11 +37,18 @@ let timerInterval: number | null = null
 const showGameOver = ref(false)
 
 const startGame = () => {
-  showMainMenu.value = false
-  showScoreboard.value = false
-  showGameOver.value = false
-  timeLeft.value = 15
-  timerActive.value = true
+  showLoading.value = true
+  setTimeout(
+    () => {
+      showLoading.value = false
+      showMainMenu.value = false
+      showScoreboard.value = false
+      showGameOver.value = false
+      timeLeft.value = 15
+      timerActive.value = true
+    },
+    2200 + Math.random() * 1200,
+  )
 }
 
 const viewScoreboard = () => {
@@ -141,28 +132,32 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <GameHeader />
-  <div class="game-container">
-    <MainMenu v-if="showMainMenu" @start-game="startGame" @view-scoreboard="viewScoreboard" />
-    <div v-else-if="showScoreboard" class="scoreboard-view">
-      <h2>Scoreboard</h2>
-      <!-- Add your scoreboard content here -->
-      <button @click="showMainMenu = true">Back to Main Menu</button>
+  <div class="main-bg">
+    <GifBanner v-if="showMainMenu && backgrounds.length" :gifs="backgrounds" />
+    <GameHeader />
+    <div class="game-container">
+      <MainMenu v-if="showMainMenu" @start-game="startGame" @view-scoreboard="viewScoreboard" />
+      <div v-else-if="showScoreboard" class="scoreboard-view">
+        <h2>Scoreboard</h2>
+        <!-- Add your scoreboard content here -->
+        <button @click="showMainMenu = true">Back to Main Menu</button>
+      </div>
+      <div v-else class="game-content-center">
+        <div class="timer" v-if="timerActive">Time Left: {{ timeLeft }}s</div>
+        <ScoreBoard :score="score" :attempts="attempts" :streak="streak" />
+        <GameGrid
+          :gridSize="gridSize"
+          @correct="increaseScore"
+          @wrong="decreaseAttempts"
+          :disabled="showGameOver"
+        />
+        <RestartButton @restart="restartGame" />
+        <GameOverModal v-if="showGameOver" :score="score" @restart="restartGame" />
+      </div>
     </div>
-    <div v-else class="game-content-center">
-      <div class="timer" v-if="timerActive">Time Left: {{ timeLeft }}s</div>
-      <ScoreBoard :score="score" :attempts="attempts" :streak="streak" />
-      <GameGrid
-        :gridSize="gridSize"
-        @correct="increaseScore"
-        @wrong="decreaseAttempts"
-        :disabled="showGameOver"
-      />
-      <RestartButton @restart="restartGame" />
-      <GameOverModal v-if="showGameOver" :score="score" @restart="restartGame" />
-    </div>
+    <GameFooter :onNextBg="() => {}" :onPrevBg="() => {}" />
+    <LoadingScreen v-if="showLoading" />
   </div>
-  <GameFooter :onNextBg="nextBackground" :onPrevBg="prevBackground" />
 
   <!-- Modal component import -->
 </template>
@@ -175,17 +170,23 @@ onUnmounted(() => {
   font-family: 'Press Start 2P', cursive;
   text-shadow: 0 2px 8px #000a;
 }
+.main-bg {
+  background: #fff;
+  min-height: 100vh;
+  min-width: 100vw;
+  width: 100vw;
+  height: 100vh;
+  overflow-x: hidden;
+}
 .game-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 100vw;
-  max-width: 100vw;
   height: calc(100vh - 120px); /* 60px header + 60px footer */
   margin-top: 60px;
   margin-bottom: 60px;
-  /* background is now set on body via JS */
   overflow-x: hidden;
 }
 
@@ -222,7 +223,20 @@ onUnmounted(() => {
     flex-wrap: wrap;
   }
 }
+@media (max-width: 768px) {
+  .game-container {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    height: calc(100vh - 100px);
+    padding: 0 4vw;
+  }
+  .scoreboard-view,
+  .game-content-center {
+    padding: 0 2vw;
+    font-size: 1rem;
+  }
+  .timer {
+    font-size: 1.2rem;
+  }
+}
 </style>
-@media (max-width: 768px) { .game-container { margin-top: 50px; margin-bottom: 50px; height:
-calc(100vh - 100px); padding: 0 4vw; } .scoreboard-view, .game-content-center { padding: 0 2vw;
-font-size: 1rem; } .timer { font-size: 1.2rem; } }
