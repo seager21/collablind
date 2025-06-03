@@ -133,30 +133,38 @@ onUnmounted(() => {
 
 <template>
   <div class="main-bg">
-    <GifBanner v-if="showMainMenu && backgrounds.length" :gifs="backgrounds" />
-    <GameHeader />
-    <div class="game-container">
-      <MainMenu v-if="showMainMenu" @start-game="startGame" @view-scoreboard="viewScoreboard" />
-      <div v-else-if="showScoreboard" class="scoreboard-view">
-        <h2>Scoreboard</h2>
-        <!-- Add your scoreboard content here -->
-        <button @click="showMainMenu = true">Back to Main Menu</button>
+    <template v-if="showLoading">
+      <LoadingScreen />
+    </template>
+    <template v-else>
+      <GifBanner
+        v-if="showMainMenu && backgrounds.length"
+        :gifs="backgrounds"
+        style="position: relative; z-index: 2"
+      />
+      <GameHeader />
+      <div class="game-container">
+        <MainMenu v-if="showMainMenu" @start-game="startGame" @view-scoreboard="viewScoreboard" />
+        <div v-else-if="showScoreboard" class="scoreboard-view">
+          <h2>Scoreboard</h2>
+          <!-- Add your scoreboard content here -->
+          <button @click="showMainMenu = true">Back to Main Menu</button>
+        </div>
+        <div v-else class="game-content-center">
+          <div class="timer" v-if="timerActive">Time Left: {{ timeLeft }}s</div>
+          <ScoreBoard :score="score" :attempts="attempts" :streak="streak" />
+          <GameGrid
+            :gridSize="gridSize"
+            @correct="increaseScore"
+            @wrong="decreaseAttempts"
+            :disabled="showGameOver"
+          />
+          <RestartButton @restart="restartGame" />
+          <GameOverModal v-if="showGameOver" :score="score" @restart="restartGame" />
+        </div>
       </div>
-      <div v-else class="game-content-center">
-        <div class="timer" v-if="timerActive">Time Left: {{ timeLeft }}s</div>
-        <ScoreBoard :score="score" :attempts="attempts" :streak="streak" />
-        <GameGrid
-          :gridSize="gridSize"
-          @correct="increaseScore"
-          @wrong="decreaseAttempts"
-          :disabled="showGameOver"
-        />
-        <RestartButton @restart="restartGame" />
-        <GameOverModal v-if="showGameOver" :score="score" @restart="restartGame" />
-      </div>
-    </div>
-    <GameFooter :onNextBg="() => {}" :onPrevBg="() => {}" />
-    <LoadingScreen v-if="showLoading" />
+      <GameFooter :onNextBg="() => {}" :onPrevBg="() => {}" />
+    </template>
   </div>
 
   <!-- Modal component import -->
