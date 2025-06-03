@@ -18,11 +18,5 @@ defineProps<{ score: number; attempts: number; streak: number }>()
   border-radius: 10px;
   text-align: center;
 }
-@media (max-width: 768px) {
-  .scoreboard {
-    font-size: 1rem;
-    padding: 6px 8px;
-    border-radius: 6px;
-  }
-}
 </style>
+@media (max-width: 768px) { .scoreboard { font-size: 1rem; padding: 6px 8px; border-radius: 6px; } }

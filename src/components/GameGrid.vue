@@ -59,15 +59,31 @@ function lightenColor(rgb: string, percent: number) {
   justify-content: center;
 }
 
+// Base grid-item styles
 .grid-item {
   aspect-ratio: 1 / 1;
   border-radius: 5px;
   cursor: pointer;
   transition: transform 0.1s;
+  // Remove tap highlight and focus/active outline on mobile
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+  user-select: none;
 }
 
-.grid-item:hover {
-  transform: scale(1.1);
+// Only apply hover/scale on devices that support hover (not touch)
+@media (hover: hover) and (pointer: fine) {
+  .grid-item:hover {
+    transform: scale(1.1);
+  }
+}
+
+// Remove active/focus highlight on mobile/touch
+.grid-item:active,
+.grid-item:focus {
+  outline: none;
+  box-shadow: none;
+  background-image: none;
 }
 @media (max-width: 768px) {
   .grid {
@@ -78,6 +94,10 @@ function lightenColor(rgb: string, percent: number) {
   }
   .grid-item {
     border-radius: 3px;
+    // Remove tap highlight and focus/active outline on mobile
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+    user-select: none;
   }
 }
 </style>

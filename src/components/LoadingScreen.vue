@@ -26,7 +26,7 @@ onMounted(() => {
   percent.value = 0
   funnyText.value = funnyMessages[Math.floor(Math.random() * funnyMessages.length)]
   const interval = setInterval(() => {
-    percent.value += Math.random() * 12 + 5
+    percent.value += Math.random() * 12 + 3
     if (percent.value >= 100) {
       percent.value = 100
       clearInterval(interval)
