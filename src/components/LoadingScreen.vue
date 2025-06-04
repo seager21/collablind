@@ -29,6 +29,9 @@ const funnyMessages = [
   'Waiting for the WiFi to connect...',
   'Trying to remember where you left your keys...',
   'Searching for the perfect toilet paper...',
+  'Donating your whole bank account money to the creator of this game...',
+  'Resetting ALL of your passwords...',
+  'Erasing your browser history...',
 ]
 
 const funnyText = ref(funnyMessages[Math.floor(Math.random() * funnyMessages.length)])
