@@ -10,13 +10,22 @@ defineProps<{ score: number; attempts: number; streak: number }>()
 </script>
 
 <style scoped lang="scss">
+@import '../assets/variables.scss';
+
 .scoreboard {
-  font-size: 1.5rem;
-  color: white;
-  background: rgba(0, 0, 0, 0.5);
+  font-size: $font-size-scoreboard;
+  color: $color-text-invert;
+  background: $color-bg-overlay;
   padding: 10px 20px;
-  border-radius: 10px;
+  border-radius: $radius-large;
   text-align: center;
 }
+
+@media (max-width: $breakpoint-mobile) {
+  .scoreboard {
+    font-size: $font-size-scoreboard-mobile;
+    padding: 6px 8px;
+    border-radius: 6px;
+  }
+}
 </style>
-@media (max-width: 768px) { .scoreboard { font-size: 1rem; padding: 6px 8px; border-radius: 6px; } }

@@ -42,8 +42,8 @@ onMounted(() => {
   percent.value = 0
   let msgIdx = Math.floor(Math.random() * funnyMessages.length)
   funnyText.value = funnyMessages[msgIdx]
-  // Loading bar: total duration between 8-13s
-  const totalDuration = 8000 + Math.random() * 5000 // ms
+  // Loading bar: total duration between 6-11s
+  const totalDuration = 6000 + Math.random() * 5000 // ms
   const start = Date.now()
   // Message interval
   const msgInterval = setInterval(() => {
@@ -70,7 +70,7 @@ onMounted(() => {
         if (typeof window !== 'undefined' && typeof window.dispatchEvent === 'function') {
           window.dispatchEvent(new CustomEvent('loading-complete'))
         }
-      }, 1000)
+      }, 1500)
     }
   }, 100)
 })

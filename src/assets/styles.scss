@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+@import './variables.scss';
 
 body {
   width: 100%;
@@ -10,23 +11,32 @@ body {
   align-items: center;
   background: url('/vaporwave.gif') no-repeat center center fixed;
   background-size: cover;
-  font-family: 'Press Start 2P', cursive;
-  color: #000000;
+  font-family: $font-main, $font-fallback;
+  color: $color-text;
   text-align: center;
 }
 
+@media (max-width: $breakpoint-mobile) {
+  body {
+    font-size: $font-size-small;
+  }
+  button {
+    font-size: $font-size-small;
+  }
+}
+
 button {
-  background: #ff00ff;
-  color: white;
+  background: $color-accent;
+  color: $color-text-invert;
   border: none;
   padding: 10px 20px;
   cursor: pointer;
   font-size: 14px;
-  transition: 0.2s;
+  transition: $transition-fast;
 }
 
 button:hover {
-  background: #ff88ff;
+  background: $color-accent-light;
 }
 
 * {
@@ -44,4 +54,13 @@ button:hover {
   height: 100vh;
   background: url('/vaporwave.gif') center/cover no-repeat;
   background-blend-mode: overlay;
+}
+
+@media (max-width: $breakpoint-mobile) {
+  body {
+    font-size: $font-size-small;
+  }
+  button {
+    font-size: $font-size-small;
+  }
 }

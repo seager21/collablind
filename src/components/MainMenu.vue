@@ -11,6 +11,8 @@ defineEmits(['start-game', 'view-scoreboard'])
 </script>
 
 <style scoped lang="scss">
+@import '../assets/variables.scss';
+
 .main-menu {
   display: flex;
   flex-direction: column;
@@ -18,31 +20,31 @@ defineEmits(['start-game', 'view-scoreboard'])
   justify-content: center;
   height: 100vh;
   background: url('/vaporwave.gif') center/cover no-repeat;
-  color: white;
+  color: $color-text-invert;
   text-align: center;
 
   h1 {
-    font-size: 2.5rem;
+    font-size: $font-size-large;
     margin-bottom: 20px;
-    color: black;
+    color: $color-text;
   }
 
   button {
     margin: 10px 0;
     padding: 10px 20px;
-    font-size: 1.2rem;
-    color: white;
-    background: #ff00ff;
+    font-size: $font-size-button;
+    color: $color-text-invert;
+    background: $color-accent;
     border: none;
     cursor: pointer;
-    transition: 0.3s;
+    transition: $transition-normal;
   }
 
   button:hover {
-    background: #ff77ff;
+    background: $color-accent-hover;
   }
 }
-@media (max-width: 768px) {
+@media (max-width: $breakpoint-mobile) {
   .main-menu {
     height: 100vh;
     padding: 0 2vw;
@@ -52,7 +54,7 @@ defineEmits(['start-game', 'view-scoreboard'])
     margin-bottom: 12px;
   }
   .main-menu button {
-    font-size: 1rem;
+    font-size: $font-size-button-mobile;
     padding: 8px 12px;
     margin: 6px 0;
   }

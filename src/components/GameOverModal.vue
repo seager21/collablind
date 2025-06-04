@@ -13,24 +13,26 @@ defineProps<{ score: number }>()
 defineEmits(['restart'])
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+@import '../assets/variables.scss';
+
 .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.7);
+  background: $color-bg-overlay;
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 2000;
+  z-index: $z-modal;
 }
 .modal-content {
   background: #222;
-  color: #fff;
+  color: $color-text-invert;
   padding: 2rem 3rem;
-  border-radius: 16px;
+  border-radius: $radius-modal;
   text-align: center;
   box-shadow: 0 4px 32px #000a;
 }
@@ -38,18 +40,18 @@ button {
   margin-top: 1.5rem;
   padding: 10px 24px;
   font-size: 1.2rem;
-  background: #ff00ff;
-  color: #fff;
+  background: $color-accent;
+  color: $color-text-invert;
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: background $transition-fast;
 }
 button:hover {
-  background: #ff77ff;
+  background: $color-accent-hover;
 }
 
-@media (max-width: 768px) {
+@media (max-width: $breakpoint-mobile) {
   .modal-content {
     padding: 1rem 0.5rem;
     font-size: 1rem;

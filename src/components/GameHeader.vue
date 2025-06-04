@@ -5,24 +5,26 @@
 </template>
 
 <style lang="scss" scoped>
+@import '../assets/variables.scss';
+
 header {
   width: 100%;
   text-align: center;
-  background: rgba(0, 0, 0, 0.7);
-  color: #fff;
-  font-size: 1.8rem;
+  background: $color-bg-overlay;
+  color: $color-text-invert;
+  font-size: $font-size-header;
   font-weight: bold;
   text-transform: uppercase;
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 1000;
+  z-index: $z-header;
   height: 60px;
   line-height: 60px;
 }
-@media (max-width: 768px) {
+@media (max-width: $breakpoint-mobile) {
   header {
-    font-size: 1.1rem;
+    font-size: $font-size-header-mobile;
     height: 50px;
     line-height: 50px;
   }

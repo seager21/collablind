@@ -20,18 +20,20 @@ const { onNextBg, onPrevBg } = props
 </script>
 
 <style lang="scss" scoped>
+@import '../assets/variables.scss';
+
 footer {
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: rgba(0, 0, 0, 0.7);
-  color: white;
+  background: $color-bg-overlay;
+  color: $color-text-invert;
   font-size: 1.2rem;
   position: fixed;
   bottom: 0;
   left: 0;
-  z-index: 1000;
+  z-index: $z-header;
   height: 60px;
   padding: 0 1rem;
 }
@@ -51,7 +53,7 @@ footer {
 .bg-arrow {
   background: none;
   border: none;
-  color: #ff00ff;
+  color: $color-accent;
   font-size: 2rem;
   cursor: pointer;
   padding: 0 1rem;
@@ -59,24 +61,24 @@ footer {
   height: 100%;
 }
 .bg-arrow:hover {
-  color: #ff77ff;
+  color: $color-accent-hover;
 }
 
 .social-links {
   margin-top: 5px;
 
   a {
-    color: #ff00ff;
+    color: $color-accent;
     margin: 0 10px;
     font-size: 1.5rem;
     transition: 0.3s;
 
     &:hover {
-      color: #ff77ff;
+      color: $color-accent-hover;
     }
   }
 }
-@media (max-width: 768px) {
+@media (max-width: $breakpoint-mobile) {
   footer {
     font-size: 0.9rem;
     height: 90px;

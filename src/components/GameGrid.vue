@@ -50,6 +50,8 @@ function lightenColor(rgb: string, percent: number) {
 </script>
 
 <style scoped lang="scss">
+@import '../assets/variables.scss';
+
 .grid {
   display: grid;
   gap: 5px;
@@ -62,7 +64,7 @@ function lightenColor(rgb: string, percent: number) {
 // Base grid-item styles
 .grid-item {
   aspect-ratio: 1 / 1;
-  border-radius: 5px;
+  border-radius: $radius-base;
   cursor: pointer;
   transition: transform 0.1s;
   // Remove tap highlight and focus/active outline on mobile
@@ -85,7 +87,8 @@ function lightenColor(rgb: string, percent: number) {
   box-shadow: none;
   background-image: none;
 }
-@media (max-width: 768px) {
+
+@media (max-width: $breakpoint-mobile) {
   .grid {
     width: 80%;
     max-width: 95vw;
@@ -93,7 +96,7 @@ function lightenColor(rgb: string, percent: number) {
     margin: 10px auto;
   }
   .grid-item {
-    border-radius: 3px;
+    border-radius: $radius-small;
     // Remove tap highlight and focus/active outline on mobile
     -webkit-tap-highlight-color: transparent;
     outline: none;
