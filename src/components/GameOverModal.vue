@@ -1,9 +1,11 @@
 <template>
-  <div class="modal-overlay">
+  <div class="modal-overlay" role="dialog" aria-modal="true" aria-label="Game Over">
     <div class="modal-content">
-      <h2>Game Over!</h2>
-      <p>Your Score: {{ score }}</p>
-      <button @click="$emit('restart')">Back to Main Menu</button>
+      <h2 tabindex="0">Game Over!</h2>
+      <p><span aria-label="Your Score">Your Score:</span> {{ score }}</p>
+      <button @click="$emit('restart')" aria-label="Back to Main Menu" tabindex="0">
+        Back to Main Menu
+      </button>
     </div>
   </div>
 </template>

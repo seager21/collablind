@@ -1,8 +1,15 @@
 <template>
-  <div class="loading-screen">
+  <div class="loading-screen" role="status" aria-live="polite">
     <GifBanner :gifs="gifs" style="margin-bottom: 1.5rem" />
-    <div class="loading-text">{{ funnyText }}</div>
-    <div class="loading-bar-outer">
+    <div class="loading-text" tabindex="0">{{ funnyText }}</div>
+    <div
+      class="loading-bar-outer"
+      role="progressbar"
+      :aria-valuenow="percent"
+      aria-valuemin="0"
+      aria-valuemax="100"
+      aria-label="Loading progress"
+    >
       <div class="loading-bar-inner" :style="{ width: percent + '%' }"></div>
     </div>
   </div>

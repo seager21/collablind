@@ -1,8 +1,26 @@
 <template>
-  <div class="gif-banner">
-    <button v-if="gifs.length > 1" class="arrow left" @click="prevGif">&#8592;</button>
-    <img :src="gifSrc" alt="Background gif" />
-    <button v-if="gifs.length > 1" class="arrow right" @click="nextGif">&#8594;</button>
+  <div class="gif-banner" role="region" aria-label="Background GIF banner">
+    <button
+      v-if="gifs.length > 1"
+      class="arrow left"
+      @click="prevGif"
+      :aria-label="'Previous background'"
+      tabindex="0"
+      @keydown.enter.space="prevGif"
+    >
+      &#8592;
+    </button>
+    <img v-if="gifs.length > 0" :src="gifSrc" alt="Animated background GIF" draggable="false" />
+    <button
+      v-if="gifs.length > 1"
+      class="arrow right"
+      @click="nextGif"
+      :aria-label="'Next background'"
+      tabindex="0"
+      @keydown.enter.space="nextGif"
+    >
+      &#8594;
+    </button>
   </div>
 </template>
 

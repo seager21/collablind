@@ -1,8 +1,11 @@
 <template>
-  <div class="scoreboard">
-    <p>Score: {{ score }} Attempts Left: {{ attempts }}</p>
-    <p>Streak: {{ streak }}</p>
-  </div>
+  <section class="scoreboard" aria-label="Scoreboard">
+    <p>
+      <span aria-label="Score">Score:</span> {{ score }}
+      <span aria-label="Attempts Left">Attempts Left:</span> {{ attempts }}
+    </p>
+    <p><span aria-label="Streak">Streak:</span> {{ streak }}</p>
+  </section>
 </template>
 
 <script setup lang="ts">

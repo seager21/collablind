@@ -1,6 +1,6 @@
 <template>
-  <header>
-    <h1>CollaBlind</h1>
+  <header role="banner" aria-label="Game title">
+    <h1 tabindex="0">CollaBlind</h1>
   </header>
 </template>
 

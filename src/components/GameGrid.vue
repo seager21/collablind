@@ -1,11 +1,20 @@
 <template>
-  <div class="grid" :style="{ gridTemplateColumns: `repeat(${gridSize}, 1fr)` }">
+  <div
+    class="grid"
+    :style="{ gridTemplateColumns: `repeat(${gridSize}, 1fr)` }"
+    role="grid"
+    aria-label="Color grid"
+  >
     <div
       v-for="(color, index) in colors"
       :key="index"
       :style="{ backgroundColor: color }"
       class="grid-item"
+      role="gridcell"
+      :tabindex="0"
       @click="checkColor(index)"
+      @keydown.enter.space="checkColor(index)"
+      :aria-label="'Color cell ' + (index + 1)"
     ></div>
   </div>
 </template>

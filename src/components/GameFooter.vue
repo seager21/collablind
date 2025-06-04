@@ -1,13 +1,23 @@
 <template>
-  <footer>
+  <footer aria-label="Site footer">
     <div class="footer-content">
       <p class="footer-label">Follow & Subscribe</p>
-      <div class="social-links">
-        <a href="https://x.com/thekarpaoff" target="_blank"><i class="fab fa-twitter"></i></a>
-        <a href="https://instagram.com/the.karpa" target="_blank"
-          ><i class="fab fa-instagram"></i
+      <nav class="social-links" aria-label="Social media links">
+        <a
+          href="https://x.com/thekarpaoff"
+          target="_blank"
+          rel="noopener"
+          aria-label="Twitter profile"
+          ><i class="fab fa-twitter" aria-hidden="true"></i
         ></a>
-      </div>
+        <a
+          href="https://instagram.com/the.karpa"
+          target="_blank"
+          rel="noopener"
+          aria-label="Instagram profile"
+          ><i class="fab fa-instagram" aria-hidden="true"></i
+        ></a>
+      </nav>
     </div>
   </footer>
 </template>

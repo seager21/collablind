@@ -1,9 +1,13 @@
 <template>
-  <div class="main-menu">
-    <h1>Welcome to CollaBlind</h1>
-    <button @click="$emit('start-game')">Start New Game</button>
-    <button @click="$emit('view-scoreboard')">Check Scoreboard</button>
-  </div>
+  <main class="main-menu" role="main" id="main-content" aria-label="Main menu">
+    <h1 tabindex="0">Welcome to CollaBlind</h1>
+    <button @click="$emit('start-game')" aria-label="Start New Game" tabindex="0">
+      Start New Game
+    </button>
+    <button @click="$emit('view-scoreboard')" aria-label="Check Scoreboard" tabindex="0">
+      Check Scoreboard
+    </button>
+  </main>
 </template>
 
 <script setup lang="ts">

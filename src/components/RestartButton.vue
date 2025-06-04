@@ -1,5 +1,5 @@
 <template>
-  <button @click="$emit('restart')">Restart Game</button>
+  <button @click="$emit('restart')" aria-label="Restart Game" tabindex="0">Restart Game</button>
 </template>
 
 <script setup lang="ts">

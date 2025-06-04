@@ -7,7 +7,32 @@
     <title>CollaBlind - Guess The Color!</title>
   </head>
   <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     <div id="app"></div>
     <script type="module" src="/src/main.ts"></script>
   </body>
+</html>
+<style>
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  z-index: 10000;
+  background: #fff;
+  color: #000;
+  padding: 8px 16px;
+  border-radius: 4px;
+}
+.skip-link:focus {
+  left: 10px;
+  top: 10px;
+  width: auto;
+  height: auto;
+  font-size: 1rem;
+  outline: 2px solid #ff00ff;
+}
+</style>
 </html>
