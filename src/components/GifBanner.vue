@@ -24,7 +24,8 @@ function prevGif() {
   position: relative;
   width: 100vw;
   max-width: 100vw;
-  height: 180px;
+  max-height: 400px;
+  aspect-ratio: 16 / 9;
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -34,7 +35,8 @@ function prevGif() {
 }
 .gif-banner img {
   width: 100vw;
-  height: 180px;
+  height: 100%;
+  aspect-ratio: 16 / 9;
   object-fit: cover;
   display: block;
 }
@@ -58,9 +60,17 @@ function prevGif() {
   right: 10px;
 }
 @media (max-width: 768px) {
-  .gif-banner,
+  .gif-banner {
+    aspect-ratio: 16 / 9;
+    height: auto;
+    min-height: 100px;
+  }
   .gif-banner img {
-    height: 100px;
+    aspect-ratio: 16 / 9;
+    width: 100vw;
+    height: auto;
+    min-height: 100px;
+    object-fit: cover;
   }
   .arrow {
     font-size: 1.3rem;

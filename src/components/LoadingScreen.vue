@@ -1,5 +1,6 @@
 <template>
   <div class="loading-screen">
+    <GifBanner :gifs="gifs" style="margin-bottom: 1.5rem" />
     <div class="loading-text">{{ funnyText }}</div>
     <div class="loading-bar-outer">
       <div class="loading-bar-inner" :style="{ width: percent + '%' }"></div>
@@ -9,6 +10,11 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
+import GifBanner from './GifBanner.vue'
+import backgrounds from '../assets/backgrounds.json'
+
+const gifs = Array.isArray(backgrounds) ? backgrounds : ['/vaporwave.gif']
+
 const funnyMessages = [
   'Entering into NASA database...',
   "Decrypting your best friend's private files...",

@@ -7,7 +7,6 @@ import RestartButton from './components/RestartButton.vue'
 import GameHeader from './components/GameHeader.vue'
 import GameFooter from './components/GameFooter.vue'
 import GameOverModal from './components/GameOverModal.vue'
-import GifBanner from './components/GifBanner.vue'
 import LoadingScreen from './components/LoadingScreen.vue'
 const backgrounds = ref<string[]>([])
 const showLoading = ref(false)
@@ -137,11 +136,6 @@ onUnmounted(() => {
       <LoadingScreen />
     </template>
     <template v-else>
-      <GifBanner
-        v-if="showMainMenu && backgrounds.length"
-        :gifs="backgrounds"
-        style="position: relative; z-index: 2"
-      />
       <GameHeader />
       <div class="game-container">
         <MainMenu v-if="showMainMenu" @start-game="startGame" @view-scoreboard="viewScoreboard" />

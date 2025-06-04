@@ -1,32 +1,24 @@
 <template>
   <footer>
-    <span class="footer-center">
-      <p>Follow & Subscribe</p>
+    <div class="footer-content">
+      <p class="footer-label">Follow & Subscribe</p>
       <div class="social-links">
         <a href="https://x.com/thekarpaoff" target="_blank"><i class="fab fa-twitter"></i></a>
         <a href="https://instagram.com/the.karpa" target="_blank"
           ><i class="fab fa-instagram"></i
         ></a>
       </div>
-    </span>
-    <button class="bg-arrow" @click="onPrevBg" aria-label="Previous background">&#8592;</button>
-    <button class="bg-arrow" @click="onNextBg" aria-label="Next background">&#8594;</button>
+    </div>
   </footer>
 </template>
 
-<script setup lang="ts">
-const props = defineProps<{ onNextBg: () => void; onPrevBg: () => void }>()
-const { onNextBg, onPrevBg } = props
-</script>
+<script setup lang="ts"></script>
 
 <style lang="scss" scoped>
 @import '../assets/variables.scss';
 
 footer {
   width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   background: $color-bg-overlay;
   color: $color-text-invert;
   font-size: 1.2rem;
@@ -36,36 +28,30 @@ footer {
   z-index: $z-header;
   height: 60px;
   padding: 0 1rem;
-}
-
-.footer-center {
-  flex: 1;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-
-  p {
-    padding-top: 2vw;
-  }
+  justify-content: flex-start;
 }
 
-.bg-arrow {
-  background: none;
-  border: none;
-  color: $color-accent;
-  font-size: 2rem;
-  cursor: pointer;
-  padding: 0 1rem;
-  transition: color 0.2s;
-  height: 100%;
+.footer-content {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
 }
-.bg-arrow:hover {
-  color: $color-accent-hover;
+
+.footer-label {
+  margin: 0;
+  padding: 0;
+  font-size: 1.1rem;
+  font-weight: 500;
+  text-align: left;
 }
 
 .social-links {
-  margin-top: 5px;
+  margin-left: auto;
+  display: flex;
+  align-items: center;
 
   a {
     color: $color-accent;
@@ -78,23 +64,28 @@ footer {
     }
   }
 }
+
 @media (max-width: $breakpoint-mobile) {
   footer {
     font-size: 0.9rem;
     height: 90px;
     padding: 0 0.5rem;
   }
-  .bg-arrow {
-    font-size: 1.5rem;
-    padding: 0 0.5rem;
+  .footer-content {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
   }
-  .footer-center p {
-    padding-top: 0vw;
+  .footer-label {
     font-size: 0.95rem;
+    text-align: left;
   }
-  .social-links a {
-    font-size: 1.1rem;
-    margin: 0 5px;
+  .social-links {
+    margin-left: 0;
+    a {
+      font-size: 1.1rem;
+      margin: 0 5px;
+    }
   }
 }
 </style>
