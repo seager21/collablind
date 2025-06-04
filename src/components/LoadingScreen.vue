@@ -18,20 +18,58 @@ const funnyMessages = [
   'Stealing cookies from the cookie jar...',
   'Bypassing the firewall...',
   'Summoning the color gods...',
+  'Loading the secret sauce...',
+  'Subscribing to @kellyshannaya on YouTube...',
+  'Sending frog pictures to your crush...',
+  'Booking a flight to Angola...',
+  'Using motherlode cheat code in real life...',
+  'Checking if you left the bathroom light on...',
+  'Reviewing your life choices...',
+  'Calculating the meaning of life...',
+  'Waiting for the WiFi to connect...',
+  'Trying to remember where you left your keys...',
+  'Searching for the perfect toilet paper...',
 ]
+
 const funnyText = ref(funnyMessages[Math.floor(Math.random() * funnyMessages.length)])
 const percent = ref(0)
+const loadingDone = ref(false)
 
 onMounted(() => {
   percent.value = 0
-  funnyText.value = funnyMessages[Math.floor(Math.random() * funnyMessages.length)]
-  const interval = setInterval(() => {
-    percent.value += Math.random() * 12 + 3
-    if (percent.value >= 100) {
+  let msgIdx = Math.floor(Math.random() * funnyMessages.length)
+  funnyText.value = funnyMessages[msgIdx]
+  // Loading bar: total duration between 8-13s
+  const totalDuration = 8000 + Math.random() * 5000 // ms
+  const start = Date.now()
+  // Message interval
+  const msgInterval = setInterval(() => {
+    let newIdx
+    do {
+      newIdx = Math.floor(Math.random() * funnyMessages.length)
+    } while (newIdx === msgIdx && funnyMessages.length > 1)
+    msgIdx = newIdx
+    funnyText.value = funnyMessages[msgIdx]
+  }, 2500)
+
+  // Progress bar interval
+  const progressInterval = setInterval(() => {
+    const elapsed = Date.now() - start
+    const pct = Math.min(100, (elapsed / totalDuration) * 100)
+    percent.value = pct
+    if (pct >= 100) {
       percent.value = 100
-      clearInterval(interval)
+      clearInterval(progressInterval)
+      clearInterval(msgInterval)
+      loadingDone.value = true
+      funnyText.value = 'Loading Complete!'
+      setTimeout(() => {
+        if (typeof window !== 'undefined' && typeof window.dispatchEvent === 'function') {
+          window.dispatchEvent(new CustomEvent('loading-complete'))
+        }
+      }, 1000)
     }
-  }, 300)
+  }, 100)
 })
 </script>
 

@@ -38,17 +38,17 @@ const showGameOver = ref(false)
 
 const startGame = () => {
   showLoading.value = true
-  setTimeout(
-    () => {
-      showLoading.value = false
-      showMainMenu.value = false
-      showScoreboard.value = false
-      showGameOver.value = false
-      timeLeft.value = 15
-      timerActive.value = true
-    },
-    2200 + Math.random() * 1200,
-  )
+  // Listen for the custom event from LoadingScreen
+  const onLoadingComplete = () => {
+    showLoading.value = false
+    showMainMenu.value = false
+    showScoreboard.value = false
+    showGameOver.value = false
+    timeLeft.value = 18 // Start with 18 seconds
+    timerActive.value = true
+    window.removeEventListener('loading-complete', onLoadingComplete)
+  }
+  window.addEventListener('loading-complete', onLoadingComplete)
 }
 
 const viewScoreboard = () => {
