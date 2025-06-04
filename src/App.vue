@@ -166,8 +166,6 @@ onUnmounted(() => {
       <GameFooter :onNextBg="() => {}" :onPrevBg="() => {}" />
     </template>
   </div>
-
-  <!-- Modal component import -->
 </template>
 
 <style scoped>
@@ -178,13 +176,17 @@ onUnmounted(() => {
   font-family: 'Press Start 2P', cursive;
   text-shadow: 0 2px 8px #000a;
 }
+/* Prevent scroll on all devices */
 .main-bg {
   background: #fff;
   min-height: 100vh;
   min-width: 100vw;
   width: 100vw;
   height: 100vh;
-  overflow-x: hidden;
+  overflow: hidden !important;
+  position: fixed;
+  top: 0;
+  left: 0;
 }
 .game-container {
   display: flex;
@@ -232,10 +234,20 @@ onUnmounted(() => {
   }
 }
 @media (max-width: 768px) {
+  .main-bg {
+    min-height: 100dvh;
+    min-width: 100vw;
+    width: 100vw;
+    height: 100dvh;
+    overflow: hidden !important;
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
   .game-container {
     margin-top: 50px;
     margin-bottom: 50px;
-    height: calc(100vh - 100px);
+    height: calc(100dvh - 100px);
     padding: 0 4vw;
   }
   .scoreboard-view,
