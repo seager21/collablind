@@ -22,6 +22,8 @@ onMounted(async () => {
 
 const score = ref(0)
 const attempts = ref(3)
+const attemptAnim = ref<{ type: 'plus' | 'minus'; key: number } | null>(null)
+let animKey = 0
 const streak = ref(0)
 const guesses = ref(0)
 const gridSize = ref(2)
@@ -63,6 +65,11 @@ const increaseScore = () => {
   // Gain +1 life after 8 correct in a row
   if (streak.value % 8 === 0) {
     attempts.value += 1
+    animKey++
+    attemptAnim.value = { type: 'plus', key: animKey }
+    setTimeout(() => {
+      attemptAnim.value = null
+    }, 500)
   }
 
   // Every 5 consecutive correct guesses, add 5 seconds
@@ -80,6 +87,11 @@ const decreaseAttempts = () => {
   if (attempts.value > 0) {
     attempts.value -= 1
     streak.value = 0 // Reset streak on incorrect guess
+    animKey++
+    attemptAnim.value = { type: 'minus', key: animKey }
+    setTimeout(() => {
+      attemptAnim.value = null
+    }, 500)
     if (attempts.value === 0) {
       endGame()
     }
@@ -186,8 +198,23 @@ onUnmounted(() => {
           <button @click="showMainMenu = true">Back to Main Menu</button>
         </div>
         <div v-else class="game-content-center">
-          <div class="timer" v-if="timerActive">Time Left: {{ timeLeft }}s</div>
+          <div class="timer-wrapper">
+            <div class="timer" v-if="timerActive" :class="{ 'timer-warning': timeLeft <= 5 }">
+              Time Left: <span class="timer-number">{{ timeLeft }}</span
+              >s
+            </div>
+          </div>
           <ScoreBoard :score="score" :attempts="attempts" :streak="streak" />
+          <transition name="attempt-float" mode="out-in">
+            <div
+              v-if="attemptAnim"
+              :key="attemptAnim.key"
+              :class="['attempt-float', attemptAnim.type === 'plus' ? 'plus' : 'minus']"
+              aria-live="polite"
+            >
+              {{ attemptAnim.type === 'plus' ? '+1' : '-1' }}
+            </div>
+          </transition>
           <GameGrid
             :gridSize="gridSize"
             @correct="increaseScore"
@@ -204,12 +231,77 @@ onUnmounted(() => {
 </template>
 
 <style scoped>
+.timer-wrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .timer {
   font-size: 2rem;
   color: #ff00ff;
   margin-bottom: 1rem;
   font-family: 'Press Start 2P', cursive;
   text-shadow: 0 2px 8px #000a;
+  transition: color 0.2s;
+}
+.timer-warning {
+  color: #ff2222 !important;
+  animation: timer-pulse 0.5s infinite alternate;
+}
+@keyframes timer-pulse {
+  0% {
+    filter: brightness(1);
+  }
+  100% {
+    filter: brightness(1.5);
+  }
+}
+.timer-number {
+  font-weight: bold;
+}
+.attempt-float {
+  position: absolute;
+  left: 50%;
+  top: 4.5em;
+  transform: translateX(-50%);
+  font-size: 2.2rem;
+  font-family: 'Press Start 2P', cursive;
+  font-weight: bold;
+  pointer-events: none;
+  opacity: 1;
+  z-index: 10;
+}
+.attempt-float.plus {
+  color: #00ffb3;
+  text-shadow: 0 2px 8px #0ff8;
+}
+.attempt-float.minus {
+  color: #800020;
+  text-shadow: 0 2px 8px #80002088;
+}
+.attempt-float.attempt-float-leave-active,
+.attempt-float.attempt-float-enter-active {
+  transition:
+    opacity 0.5s,
+    transform 0.5s;
+}
+.attempt-float.attempt-float-enter-from {
+  opacity: 0;
+  transform: translateX(-50%) translateY(20px);
+}
+.attempt-float.attempt-float-enter-to {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+.attempt-float.attempt-float-leave-from {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+.attempt-float.attempt-float-leave-to {
+  opacity: 0;
+  transform: translateX(-50%) translateY(-30px);
 }
 /* Prevent scroll on all devices */
 .main-bg {
