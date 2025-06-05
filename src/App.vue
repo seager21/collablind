@@ -152,46 +152,46 @@ onUnmounted(() => {
       <div class="game-container">
         <MainMenu v-if="showMainMenu" @start-game="startGame" @view-scoreboard="viewScoreboard" />
         <div v-else-if="showScoreboard" class="scoreboard-view">
-          <h2>Scoreboard</h2>
+          <h2 class="scoreboard-title">Scoreboard</h2>
           <ol class="top-scores" aria-label="Top 10 Scores">
             <li>
-              <span class="score-name">BigLarry3000</span><span class="score-sep">:</span
+              <span class="score-name">BigLarry3000</span><span class="score-sep">-</span
               ><span class="score-value">101</span>
             </li>
             <li>
-              <span class="score-name">x_xKillerBee</span><span class="score-sep">:</span
+              <span class="score-name">x_xKillerBee</span><span class="score-sep">-</span
               ><span class="score-value">88</span>
             </li>
             <li>
-              <span class="score-name">BlindBandit</span><span class="score-sep">:</span
+              <span class="score-name">BlindBandit</span><span class="score-sep">-</span
               ><span class="score-value">87</span>
             </li>
             <li>
-              <span class="score-name">CarecaNasPontas</span><span class="score-sep">:</span
+              <span class="score-name">CarecaNasPontas</span><span class="score-sep">-</span
               ><span class="score-value">73</span>
             </li>
             <li>
-              <span class="score-name">ElonMusk</span><span class="score-sep">:</span
+              <span class="score-name">ElonMusk</span><span class="score-sep">-</span
               ><span class="score-value">72</span>
             </li>
             <li>
-              <span class="score-name">BombardiroCrocodilo</span><span class="score-sep">:</span
+              <span class="score-name">BombardiroCrocodilo</span><span class="score-sep">-</span
               ><span class="score-value">71</span>
             </li>
             <li>
-              <span class="score-name">BigodinFinin</span><span class="score-sep">:</span
+              <span class="score-name">BigodinFinin</span><span class="score-sep">-</span
               ><span class="score-value">71</span>
             </li>
             <li>
-              <span class="score-name">PizzaHutOfficial</span><span class="score-sep">:</span
+              <span class="score-name">PizzaHutOfficial</span><span class="score-sep">-</span
               ><span class="score-value">71</span>
             </li>
             <li>
-              <span class="score-name">MissMatcha</span><span class="score-sep">:</span
+              <span class="score-name">MissMatcha</span><span class="score-sep">-</span
               ><span class="score-value">70</span>
             </li>
             <li>
-              <span class="score-name">ShadeWizard</span><span class="score-sep">:</span
+              <span class="score-name">ShadeWizard</span><span class="score-sep">-</span
               ><span class="score-value">68</span>
             </li>
           </ol>
@@ -230,7 +230,7 @@ onUnmounted(() => {
   </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 .timer-wrapper {
   position: relative;
   width: 100%;
@@ -336,47 +336,64 @@ onUnmounted(() => {
   height: 100%;
 }
 
+@import './assets/variables.scss';
+
 .top-scores {
   margin: 1.5rem 0 1.5rem 0;
   padding: 0 1.5rem;
-  font-size: 1.05rem;
-  color: #ff00ff;
-  background: rgba(255, 255, 255, 0.07);
-  border-radius: 12px;
+  font-size: $font-size-scoreboard-mobile;
+  color: $color-accent;
+  background: $color-bg-dark;
+  border-radius: $radius-large;
   list-style: decimal inside;
   max-width: 350px;
   width: 100%;
+  box-shadow: 0 2px 16px #0006;
 }
+.scoreboard-title {
+  color: $color-accent;
+  text-align: center;
+  margin-bottom: 0.7em;
+  font-family: $font-main, $font-fallback;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 8px #000a;
+  font-size: $font-size-header;
+}
+/* Scoreboard grid layout */
+/* Scoreboard grid layout */
 .top-scores li {
   margin: 0.3rem 0;
-  font-family: 'Press Start 2P', cursive;
+  font-family: $font-main, $font-fallback;
   letter-spacing: 1px;
   text-shadow: 0 1px 4px #0002;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto 3.5em;
   align-items: center;
-  justify-content: flex-start;
-  gap: 0.5em;
+  gap: 0.2em;
 }
 .score-name {
-  flex: unset;
   text-align: left;
-  min-width: unset;
   overflow: visible;
   text-overflow: unset;
   white-space: normal;
+  padding-right: 0.5em;
+  font-size: 0.65em;
+  color: $color-text;
 }
 .score-sep {
-  flex: 0 0 auto;
-  margin: 0 0.5em;
+  text-align: center;
+  margin: 0 0.2em;
+  color: $color-accent-light;
 }
 .score-value {
-  flex: 0 0 2.5em;
   text-align: right;
   font-weight: bold;
+  padding-left: 0.5em;
+  color: $color-accent;
 }
-@media (max-width: 768px) {
+@media (max-width: $breakpoint-mobile) {
   .top-scores {
-    font-size: 0.85rem;
+    font-size: $font-size-scoreboard-mobile;
     padding: 0 0.5rem;
     max-width: 98vw;
   }
@@ -392,7 +409,7 @@ onUnmounted(() => {
   margin: 1.5rem 0 1.5rem 0;
   padding: 0 1.5rem;
   font-size: 1.3rem;
-  color: #ff00ff;
+  color: #111;
   background: rgba(255, 255, 255, 0.07);
   border-radius: 12px;
   list-style: decimal inside;
