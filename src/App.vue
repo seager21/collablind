@@ -142,16 +142,46 @@ onUnmounted(() => {
         <div v-else-if="showScoreboard" class="scoreboard-view">
           <h2>Scoreboard</h2>
           <ol class="top-scores" aria-label="Top 10 Scores">
-            <li>BigLarry3000 : 101</li>
-            <li>x_xKillerBee : 88</li>
-            <li>BlindBandit : 87</li>
-            <li>CarecaNasPontas : 73</li>
-            <li>Elon Musk : 72</li>
-            <li>Bombardiro Crocodilo : 71</li>
-            <li>Bigodin Finin : 71</li>
-            <li>Pizza Hut Official : 71</li>
-            <li>MissMatcha : 70</li>
-            <li>ShadeWizard : 68</li>
+            <li>
+              <span class="score-name">BigLarry3000</span><span class="score-sep">:</span
+              ><span class="score-value">101</span>
+            </li>
+            <li>
+              <span class="score-name">x_xKillerBee</span><span class="score-sep">:</span
+              ><span class="score-value">88</span>
+            </li>
+            <li>
+              <span class="score-name">BlindBandit</span><span class="score-sep">:</span
+              ><span class="score-value">87</span>
+            </li>
+            <li>
+              <span class="score-name">CarecaNasPontas</span><span class="score-sep">:</span
+              ><span class="score-value">73</span>
+            </li>
+            <li>
+              <span class="score-name">ElonMusk</span><span class="score-sep">:</span
+              ><span class="score-value">72</span>
+            </li>
+            <li>
+              <span class="score-name">BombardiroCrocodilo</span><span class="score-sep">:</span
+              ><span class="score-value">71</span>
+            </li>
+            <li>
+              <span class="score-name">BigodinFinin</span><span class="score-sep">:</span
+              ><span class="score-value">71</span>
+            </li>
+            <li>
+              <span class="score-name">PizzaHutOfficial</span><span class="score-sep">:</span
+              ><span class="score-value">71</span>
+            </li>
+            <li>
+              <span class="score-name">MissMatcha</span><span class="score-sep">:</span
+              ><span class="score-value">70</span>
+            </li>
+            <li>
+              <span class="score-name">ShadeWizard</span><span class="score-sep">:</span
+              ><span class="score-value">68</span>
+            </li>
           </ol>
           <button @click="showMainMenu = true">Back to Main Menu</button>
         </div>
@@ -213,10 +243,11 @@ onUnmounted(() => {
   width: 100%;
   height: 100%;
 }
+
 .top-scores {
   margin: 1.5rem 0 1.5rem 0;
   padding: 0 1.5rem;
-  font-size: 1.3rem;
+  font-size: 1.05rem;
   color: #ff00ff;
   background: rgba(255, 255, 255, 0.07);
   border-radius: 12px;
@@ -229,12 +260,39 @@ onUnmounted(() => {
   font-family: 'Press Start 2P', cursive;
   letter-spacing: 1px;
   text-shadow: 0 1px 4px #0002;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.5em;
+}
+.score-name {
+  flex: unset;
+  text-align: left;
+  min-width: unset;
+  overflow: visible;
+  text-overflow: unset;
+  white-space: normal;
+}
+.score-sep {
+  flex: 0 0 auto;
+  margin: 0 0.5em;
+}
+.score-value {
+  flex: 0 0 2.5em;
+  text-align: right;
+  font-weight: bold;
 }
 @media (max-width: 768px) {
   .top-scores {
-    font-size: 1rem;
+    font-size: 0.85rem;
     padding: 0 0.5rem;
     max-width: 98vw;
+  }
+  .top-scores li {
+    gap: 0.3em;
+  }
+  .score-value {
+    font-size: 0.95em;
   }
 }
 
