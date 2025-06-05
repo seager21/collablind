@@ -141,7 +141,18 @@ onUnmounted(() => {
         <MainMenu v-if="showMainMenu" @start-game="startGame" @view-scoreboard="viewScoreboard" />
         <div v-else-if="showScoreboard" class="scoreboard-view">
           <h2>Scoreboard</h2>
-          <!-- Add your scoreboard content here -->
+          <ol class="top-scores" aria-label="Top 10 Scores">
+            <li>BigLarry3000 : 101</li>
+            <li>x_xKillerBee : 88</li>
+            <li>BlindBandit : 87</li>
+            <li>CarecaNasPontas : 73</li>
+            <li>Elon Musk : 72</li>
+            <li>Bombardiro Crocodilo : 71</li>
+            <li>Bigodin Finin : 71</li>
+            <li>Pizza Hut Official : 71</li>
+            <li>MissMatcha : 70</li>
+            <li>ShadeWizard : 68</li>
+          </ol>
           <button @click="showMainMenu = true">Back to Main Menu</button>
         </div>
         <div v-else class="game-content-center">
@@ -201,6 +212,55 @@ onUnmounted(() => {
   justify-content: center;
   width: 100%;
   height: 100%;
+}
+.top-scores {
+  margin: 1.5rem 0 1.5rem 0;
+  padding: 0 1.5rem;
+  font-size: 1.3rem;
+  color: #ff00ff;
+  background: rgba(255, 255, 255, 0.07);
+  border-radius: 12px;
+  list-style: decimal inside;
+  max-width: 350px;
+  width: 100%;
+}
+.top-scores li {
+  margin: 0.3rem 0;
+  font-family: 'Press Start 2P', cursive;
+  letter-spacing: 1px;
+  text-shadow: 0 1px 4px #0002;
+}
+@media (max-width: 768px) {
+  .top-scores {
+    font-size: 1rem;
+    padding: 0 0.5rem;
+    max-width: 98vw;
+  }
+}
+
+.top-scores {
+  margin: 1.5rem 0 1.5rem 0;
+  padding: 0 1.5rem;
+  font-size: 1.3rem;
+  color: #ff00ff;
+  background: rgba(255, 255, 255, 0.07);
+  border-radius: 12px;
+  list-style: decimal inside;
+  max-width: 350px;
+  width: 100%;
+}
+.top-scores li {
+  margin: 0.3rem 0;
+  font-family: 'Press Start 2P', cursive;
+  letter-spacing: 1px;
+  text-shadow: 0 1px 4px #0002;
+}
+@media (max-width: 768px) {
+  .top-scores {
+    font-size: 1rem;
+    padding: 0 0.5rem;
+    max-width: 98vw;
+  }
 }
 
 .game-content-center {
