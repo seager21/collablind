@@ -346,7 +346,7 @@ onUnmounted(() => {
   background: $color-bg-dark;
   border-radius: $radius-large;
   list-style: decimal inside;
-  max-width: 700px;
+  max-width: 500px;
   width: 100%;
   box-shadow: 0 2px 16px #0006;
 }
@@ -413,7 +413,7 @@ onUnmounted(() => {
   background: rgba(255, 255, 255, 0.07);
   border-radius: 12px;
   list-style: decimal inside;
-  max-width: 350px;
+  max-width: 500px;
   width: 100%;
 }
 .top-scores li {
