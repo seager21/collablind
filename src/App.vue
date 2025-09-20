@@ -195,7 +195,7 @@ onUnmounted(() => {
               ><span class="score-value">68</span>
             </li>
           </ol>
-          <button @click="showMainMenu = true">Back to Main Menu</button>
+          <button class="btn-effect" @click="showMainMenu = true">Back to Main Menu</button>
         </div>
         <div v-else class="game-content-center">
           <div class="timer-wrapper">
@@ -231,6 +231,8 @@ onUnmounted(() => {
 </template>
 
 <style scoped lang="scss">
+@import './assets/variables.scss';
+@import './assets/animations.scss';
 .timer-wrapper {
   position: relative;
   width: 100%;

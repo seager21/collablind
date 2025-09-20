@@ -1,15 +1,15 @@
 <template>
   <div
-    class="grid"
+    class="grid animate-scaleIn"
     :style="{ gridTemplateColumns: `repeat(${gridSize}, 1fr)` }"
     role="grid"
     aria-label="Color grid"
   >
     <div
       v-for="(color, index) in colors"
-      :key="index"
-      :style="{ backgroundColor: color }"
-      class="grid-item"
+      :key="`${gridSize}-${index}`"
+      :style="{ backgroundColor: color, '--index': index }"
+      class="grid-item grid-item-enter"
       role="gridcell"
       :tabindex="0"
       @click="checkColor(index)"
@@ -21,9 +21,13 @@
 
 <script setup lang="ts">
 import { defineEmits, onMounted, ref, watch } from 'vue'
+import { useSound } from '../composables/useSound'
+import { useHaptics } from '../composables/useMobileInteractions'
 
 const props = defineProps<{ gridSize: number }>()
 const emit = defineEmits(['correct', 'wrong'])
+const { playCorrect, playWrong } = useSound()
+const { successFeedback, errorFeedback, tapFeedback } = useHaptics()
 
 const baseColor = ref('')
 const differentColor = ref('')
@@ -39,8 +43,17 @@ const generateColors = () => {
 }
 
 const checkColor = (index: number) => {
-  if (colors.value[index] === differentColor.value) emit('correct')
-  else emit('wrong')
+  tapFeedback() // Haptic feedback for touch
+  
+  if (colors.value[index] === differentColor.value) {
+    playCorrect()
+    successFeedback() // Success haptic pattern
+    emit('correct')
+  } else {
+    playWrong()
+    errorFeedback() // Error haptic pattern
+    emit('wrong')
+  }
   generateColors()
 }
 
@@ -60,6 +73,7 @@ function lightenColor(rgb: string, percent: number) {
 
 <style scoped lang="scss">
 @import '../assets/variables.scss';
+@import '../assets/animations.scss';
 
 .grid {
   display: grid;
@@ -75,11 +89,16 @@ function lightenColor(rgb: string, percent: number) {
   aspect-ratio: 1 / 1;
   border-radius: $radius-base;
   cursor: pointer;
-  transition: transform 0.1s;
-  // Remove tap highlight and focus/active outline on mobile
+  transition: transform $animation-duration-fast $animation-easing, box-shadow $animation-duration-fast;
   -webkit-tap-highlight-color: transparent;
   outline: none;
   user-select: none;
+  
+  &.grid-item-enter {
+    animation: slideInUp $animation-duration-fast $animation-easing;
+    animation-delay: calc(var(--index) * 0.02s);
+    animation-fill-mode: both;
+  }
 }
 
 // Only apply hover/scale on devices that support hover (not touch)

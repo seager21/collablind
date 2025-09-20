@@ -1,34 +1,121 @@
 @import './base.css';
+@import './animations.scss';
+@import './mobile.scss';
 
+/* Mobile-first responsive design */
 #app {
-  max-width: 1280px;
-  margin: 0 auto;
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
   font-weight: normal;
+  overflow-x: hidden;
+  position: relative;
+  
+  /* Performance optimizations */
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
+/* Enhanced link styles with better touch targets */
 a,
 .green {
   text-decoration: none;
   color: hsla(160, 100%, 37%, 1);
-  transition: 0.4s;
-  padding: 3px;
+  transition: color 0.3s ease, background-color 0.3s ease;
+  padding: 8px 12px;
+  border-radius: 4px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  
+  /* Touch optimizations */
+  -webkit-tap-highlight-color: rgba(160, 100%, 37%, 0.2);
+  touch-action: manipulation;
 }
 
+/* Hover effects for devices that support it */
 @media (hover: hover) {
   a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
+    background-color: hsla(160, 100%, 37%, 0.15);
+    transform: translateY(-1px);
   }
 }
 
+/* Touch feedback for mobile devices */
+@media (hover: none) {
+  a:active {
+    background-color: hsla(160, 100%, 37%, 0.2);
+    transform: scale(0.98);
+  }
+}
+
+/* Mobile-first layout */
+@media (max-width: 767px) {
+  #app {
+    padding: 0;
+  }
+  
+  a, .green {
+    padding: 12px 16px;
+    margin: 4px 0;
+  }
+}
+
+/* Tablet layout */
+@media (min-width: 768px) and (max-width: 1023px) {
+  #app {
+    max-width: 100%;
+    padding: 0 20px;
+  }
+}
+
+/* Desktop layout */
 @media (min-width: 1024px) {
+  #app {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+  
   body {
     display: flex;
     place-items: center;
   }
+}
 
+/* Performance improvements for animations */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  a, .green {
+    border: 2px solid currentColor;
+  }
+}
+
+/* Dark mode preparations */
+@media (prefers-color-scheme: dark) {
   #app {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
+    background-color: #1a1a1a;
+    color: #ffffff;
+  }
+}
+
+/* Safe area handling for devices with notches */
+@supports (padding: max(0px)) {
+  #app {
+    padding-left: max(16px, env(safe-area-inset-left));
+    padding-right: max(16px, env(safe-area-inset-right));
   }
 }

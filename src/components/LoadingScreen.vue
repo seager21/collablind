@@ -89,11 +89,22 @@ onMounted(() => {
 })
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+@import '../assets/variables.scss';
+@import '../assets/animations.scss';
+
 .loading-screen {
   width: 100vw;
   height: 100vh;
-  background: #fff;
+  background: linear-gradient(135deg, 
+    #1a0033 0%, 
+    #330066 25%, 
+    #4d0099 50%, 
+    #330066 75%, 
+    #1a0033 100%
+  );
+  background-size: 400% 400%;
+  animation: gradientShift 8s ease-in-out infinite;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -102,38 +113,214 @@ onMounted(() => {
   position: fixed;
   top: 0;
   left: 0;
+  overflow: hidden;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      radial-gradient(circle at 20% 80%, rgba($color-button-primary, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba($color-button-secondary, 0.1) 0%, transparent 50%);
+    animation: floatingOrbs 10s ease-in-out infinite;
+  }
 }
+
 .loading-text {
-  font-size: 1.3rem;
-  color: #ff00ff;
-  margin-bottom: 2rem;
+  font-size: 1.4rem;
+  color: $color-button-primary;
+  margin-bottom: 2.5rem;
   font-family: 'Press Start 2P', cursive;
   text-align: center;
   max-width: 90vw;
+  text-shadow: 
+    0 0 10px rgba($color-button-primary, 0.6),
+    0 0 20px rgba($color-button-primary, 0.4),
+    0 0 30px rgba($color-button-primary, 0.2);
+  animation: textPulse 2s ease-in-out infinite;
+  position: relative;
+  z-index: 2;
+  line-height: 1.4;
+  padding: 0 1rem;
 }
+
 .loading-bar-outer {
-  width: 320px;
-  max-width: 80vw;
-  height: 18px;
-  background: #eee;
-  border-radius: 10px;
+  width: 400px;
+  max-width: 85vw;
+  height: 24px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 12px;
   overflow: hidden;
-  border: 2px solid #ff00ff;
+  border: 2px solid $color-button-primary;
+  box-shadow: 
+    0 0 20px rgba($color-button-primary, 0.4),
+    inset 0 0 10px rgba(0, 0, 0, 0.3);
+  position: relative;
+  z-index: 2;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.2),
+      transparent
+    );
+    animation: barShimmer 2s ease-in-out infinite;
+  }
 }
+
 .loading-bar-inner {
   height: 100%;
-  background: linear-gradient(90deg, #ff00ff, #ff77ff);
+  background: linear-gradient(90deg, 
+    $color-button-primary 0%, 
+    $color-button-secondary 50%, 
+    $color-button-primary 100%
+  );
+  background-size: 200% 100%;
   width: 0%;
-  transition: width 0.3s;
-}
-@media (max-width: 768px) {
-  .loading-text {
-    font-size: 1rem;
-    margin-bottom: 1.2rem;
+  transition: width 0.3s ease;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba($color-button-primary, 0.6);
+  animation: progressGlow 2s ease-in-out infinite;
+  position: relative;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 50%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.3),
+      transparent
+    );
+    border-radius: 5px;
   }
+}
+
+@keyframes gradientShift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes floatingOrbs {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-20px) rotate(90deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(180deg);
+  }
+  75% {
+    transform: translateY(-30px) rotate(270deg);
+  }
+}
+
+@keyframes textPulse {
+  0%, 100% {
+    text-shadow: 
+      0 0 10px rgba($color-button-primary, 0.6),
+      0 0 20px rgba($color-button-primary, 0.4),
+      0 0 30px rgba($color-button-primary, 0.2);
+  }
+  50% {
+    text-shadow: 
+      0 0 15px rgba($color-button-primary, 0.8),
+      0 0 30px rgba($color-button-primary, 0.6),
+      0 0 45px rgba($color-button-primary, 0.4);
+  }
+}
+
+@keyframes barShimmer {
+  0%, 100% {
+    left: -100%;
+  }
+  50% {
+    left: 100%;
+  }
+}
+
+@keyframes progressGlow {
+  0%, 100% {
+    background-position: 0% 50%;
+    box-shadow: 0 0 15px rgba($color-button-primary, 0.6);
+  }
+  50% {
+    background-position: 100% 50%;
+    box-shadow: 0 0 25px rgba($color-button-primary, 0.8);
+  }
+}
+
+@media (max-width: $breakpoint-mobile) {
+  .loading-text {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    padding: 0 1.5rem;
+  }
+  
   .loading-bar-outer {
     width: 90vw;
-    height: 12px;
+    height: 20px;
+    border-radius: 10px;
+  }
+  
+  .loading-bar-inner {
+    border-radius: 8px;
+  }
+}
+
+@media (max-width: $breakpoint-small) {
+  .loading-text {
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.3;
+  }
+  
+  .loading-bar-outer {
+    height: 16px;
+    border-radius: 8px;
+  }
+  
+  .loading-bar-inner {
+    border-radius: 6px;
+  }
+}
+
+// Accessibility: Reduce motion for users who prefer it
+@media (prefers-reduced-motion: reduce) {
+  .loading-screen,
+  .loading-screen::before,
+  .loading-text,
+  .loading-bar-outer::before,
+  .loading-bar-inner {
+    animation: none;
+  }
+  
+  .loading-text {
+    text-shadow: 0 0 10px rgba($color-button-primary, 0.6);
+  }
+  
+  .loading-bar-inner {
+    box-shadow: 0 0 15px rgba($color-button-primary, 0.6);
   }
 }
 </style>

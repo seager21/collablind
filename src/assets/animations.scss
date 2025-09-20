@@ -1,0 +1,270 @@
+// Global animations and keyframes for CollaBlind
+@import './variables.scss';
+
+// Keyframe animations
+@keyframes magnet {
+  0% {
+    transform: scale(1.1) translateY(0);
+  }
+  100% {
+    transform: scale(1.1) translateY(-2px);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    filter: brightness(1);
+  }
+  100% {
+    filter: brightness(1.5);
+  }
+}
+
+@keyframes slideInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes scaleIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 5px $color-button-primary-shadow;
+  }
+  50% {
+    box-shadow: 0 0 20px $color-button-primary-shadow, 0 0 30px $color-button-primary-shadow;
+  }
+  100% {
+    box-shadow: 0 0 5px $color-button-primary-shadow;
+  }
+}
+
+// Button effect classes
+.btn-effect {
+  background: $color-button-primary;
+  color: $color-text-invert;
+  border: none;
+  border-radius: $radius-base;
+  padding: 0.8rem 1.5rem;
+  font-family: $font-main, $font-fallback;
+  font-size: $font-size-button;
+  cursor: pointer;
+  transition: $transition-all;
+  position: relative;
+  overflow: hidden;
+  
+  &:hover {
+    background: $color-button-primary-hover;
+    transform: scale(1.1);
+    box-shadow: 0 0 15px $color-button-primary-shadow;
+    animation: magnet $animation-duration-medium $animation-easing alternate infinite;
+  }
+  
+  &:active {
+    transform: scale(0.95);
+    transition-duration: $animation-duration-fast;
+  }
+  
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba($color-button-primary, 0.3);
+  }
+  
+  // Ripple effect
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    transition: width $animation-duration-medium, height $animation-duration-medium;
+    transform: translate(-50%, -50%);
+  }
+  
+  &:active::before {
+    width: 300px;
+    height: 300px;
+  }
+}
+
+.btn-secondary {
+  @extend .btn-effect;
+  background: $color-button-secondary;
+  
+  &:hover {
+    background: $color-button-secondary-hover;
+    box-shadow: 0 0 15px rgba($color-button-secondary, 0.6);
+  }
+}
+
+// Page transition classes
+.page-enter-active,
+.page-leave-active {
+  transition: opacity $animation-duration-medium, transform $animation-duration-medium;
+}
+
+.page-enter-from {
+  opacity: 0;
+  transform: translateX(20px);
+}
+
+.page-leave-to {
+  opacity: 0;
+  transform: translateX(-20px);
+}
+
+// Modal transitions
+.modal-enter-active {
+  animation: bounceIn $animation-duration-slow $animation-bounce;
+}
+
+.modal-leave-active {
+  animation: fadeOut $animation-duration-fast;
+}
+
+// Grid animations
+.grid-enter-active {
+  animation: scaleIn $animation-duration-medium $animation-easing;
+}
+
+.grid-item-enter-active {
+  animation: slideInUp $animation-duration-fast $animation-easing;
+  animation-fill-mode: both;
+}
+
+.grid-item-enter-from {
+  animation-delay: calc(var(--index) * 0.05s);
+}
+
+// Utility animation classes
+.animate-slideInUp {
+  animation: slideInUp $animation-duration-medium $animation-easing;
+}
+
+.animate-slideInDown {
+  animation: slideInDown $animation-duration-medium $animation-easing;
+}
+
+.animate-fadeIn {
+  animation: fadeIn $animation-duration-medium $animation-easing;
+}
+
+.animate-bounceIn {
+  animation: bounceIn $animation-duration-slow $animation-bounce;
+}
+
+.animate-glow {
+  animation: glow 2s $animation-easing infinite;
+}
+
+// Mobile optimizations
+@media (max-width: $breakpoint-mobile) {
+  .btn-effect {
+    padding: 0.6rem 1.2rem;
+    font-size: $font-size-button-mobile;
+    
+    &:hover {
+      transform: scale(1.05); // Reduced scale for mobile
+    }
+    
+    // Disable hover animations on touch devices
+    @media (hover: none) {
+      &:hover {
+        animation: none;
+        transform: none;
+        box-shadow: none;
+      }
+    }
+  }
+  
+  // Faster animations on mobile for better performance
+  .page-enter-active,
+  .page-leave-active {
+    transition-duration: $animation-duration-fast;
+  }
+  
+  .modal-enter-active {
+    animation-duration: $animation-duration-medium;
+  }
+}
+
+// Reduce motion for accessibility
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .btn-effect:hover {
+    animation: none;
+  }
+}

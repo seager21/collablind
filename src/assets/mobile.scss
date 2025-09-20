@@ -1,0 +1,163 @@
+// Mobile-specific utilities and optimizations
+@import './variables.scss';
+
+// Touch-friendly mixins
+@mixin touch-target {
+  min-height: $touch-target-min;
+  min-width: $touch-target-min;
+  padding: 12px;
+  margin: 8px;
+}
+
+@mixin touch-feedback {
+  -webkit-tap-highlight-color: rgba($color-button-primary, 0.2);
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+  touch-action: manipulation;
+  
+  &:active {
+    transform: scale(0.98);
+    transition: transform 0.1s ease;
+  }
+}
+
+@mixin mobile-scroll {
+  scroll-behavior: smooth;
+  // Modern browsers support these properties for better scroll experience
+  @supports (overscroll-behavior: contain) {
+    overscroll-behavior: contain;
+  }
+}
+
+// Mobile-optimized animations
+@mixin mobile-safe-animation {
+  @media (max-width: $breakpoint-mobile) {
+    animation-duration: 0.2s !important;
+    transition-duration: 0.2s !important;
+  }
+  
+  @media (prefers-reduced-motion: reduce) {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+// Performance optimizations
+@mixin gpu-acceleration {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000;
+  will-change: transform;
+}
+
+@mixin mobile-text-rendering {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  
+  @media (max-width: $breakpoint-mobile) {
+    -webkit-font-smoothing: subpixel-antialiased;
+    text-rendering: optimizeSpeed;
+  }
+}
+
+// Layout utilities
+@mixin mobile-container {
+  max-width: 100vw;
+  overflow-x: hidden;
+  padding: 0 16px;
+  
+  @media (max-width: $breakpoint-small) {
+    padding: 0 12px;
+  }
+}
+
+@mixin mobile-grid {
+  display: grid;
+  gap: 12px;
+  padding: 16px;
+  
+  @media (max-width: $breakpoint-mobile) {
+    gap: 8px;
+    padding: 12px;
+  }
+  
+  @media (max-width: $breakpoint-small) {
+    gap: 6px;
+    padding: 8px;
+  }
+}
+
+// Responsive utility classes
+.mobile-only {
+  @media (min-width: #{$breakpoint-mobile + 1px}) {
+    display: none !important;
+  }
+}
+
+.tablet-up {
+  @media (max-width: $breakpoint-mobile) {
+    display: none !important;
+  }
+}
+
+.touch-optimized {
+  @include touch-target;
+  @include touch-feedback;
+}
+
+.gpu-optimized {
+  @include gpu-acceleration;
+}
+
+.mobile-text {
+  @include mobile-text-rendering;
+}
+
+// Mobile-first responsive grid
+.responsive-grid {
+  display: grid;
+  gap: 16px;
+  
+  // Mobile: single column
+  grid-template-columns: 1fr;
+  
+  // Tablet: two columns
+  @media (min-width: $breakpoint-mobile) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  
+  // Desktop: three columns
+  @media (min-width: $breakpoint-tablet) {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+}
+
+// Safe area handling for mobile devices with notches
+.safe-area-container {
+  padding-top: constant(safe-area-inset-top);
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: constant(safe-area-inset-bottom);
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-left: constant(safe-area-inset-left);
+  padding-left: env(safe-area-inset-left);
+  padding-right: constant(safe-area-inset-right);
+  padding-right: env(safe-area-inset-right);
+}
+
+// Improved focus styles for mobile accessibility
+.mobile-focus {
+  &:focus {
+    outline: 2px solid $color-button-primary;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px rgba($color-button-primary, 0.2);
+  }
+  
+  &:focus:not(:focus-visible) {
+    outline: none;
+    box-shadow: none;
+  }
+}

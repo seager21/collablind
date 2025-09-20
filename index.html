@@ -3,7 +3,33 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" href="/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Enhanced mobile viewport with performance optimizations -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    
+    <!-- Mobile web app capabilities -->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="CollaBlind" />
+    
+    <!-- Theme colors for mobile browsers -->
+    <meta name="theme-color" content="#e67e22" />
+    <meta name="msapplication-navbutton-color" content="#e67e22" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="#e67e22" />
+    
+    <!-- Performance hints -->
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="format-detection" content="address=no" />
+    
+    <!-- SEO and social sharing -->
+    <meta name="description" content="CollaBlind - Test your color perception in this fun vaporwave-style color guessing game!" />
+    <meta name="keywords" content="color game, vaporwave, color blindness, mobile game, web game" />
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="/src/assets/variables.scss" as="style" />
+    <link rel="preload" href="/src/assets/animations.scss" as="style" />
+    
     <title>CollaBlind - Guess The Color!</title>
   </head>
   <body>
@@ -13,6 +39,7 @@
   </body>
 </html>
 <style>
+/* Enhanced skip link with better mobile support */
 .skip-link {
   position: absolute;
   left: -999px;
@@ -21,18 +48,55 @@
   height: 1px;
   overflow: hidden;
   z-index: 10000;
-  background: #fff;
-  color: #000;
-  padding: 8px 16px;
-  border-radius: 4px;
+  background: #e67e22;
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  font-size: 1rem;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
 .skip-link:focus {
-  left: 10px;
-  top: 10px;
+  left: 16px;
+  top: 16px;
   width: auto;
   height: auto;
-  font-size: 1rem;
-  outline: 2px solid #ff00ff;
+  outline: 3px solid #f39c12;
+  outline-offset: 2px;
+  transform: scale(1.05);
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  .skip-link {
+    padding: 16px 24px;
+    font-size: 1.1rem;
+  }
+  
+  .skip-link:focus {
+    left: 12px;
+    top: 12px;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .skip-link {
+    border: 2px solid #fff;
+  }
+  
+  .skip-link:focus {
+    outline: 3px solid #fff;
+    background: #000;
+    color: #fff;
+  }
 }
 </style>
 </html>

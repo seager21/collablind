@@ -1,9 +1,9 @@
 <template>
-  <div class="modal-overlay" role="dialog" aria-modal="true" aria-label="Game Over">
-    <div class="modal-content">
+  <div class="modal-overlay animate-fadeIn" role="dialog" aria-modal="true" aria-label="Game Over">
+    <div class="modal-content animate-bounceIn">
       <h2 tabindex="0">Game Over!</h2>
       <p><span aria-label="Your Score">Your Score:</span> {{ score }}</p>
-      <button @click="$emit('restart')" aria-label="Back to Main Menu" tabindex="0">
+      <button class="btn-effect" @click="handleRestart" aria-label="Back to Main Menu" tabindex="0">
         Back to Main Menu
       </button>
     </div>
@@ -11,12 +11,24 @@
 </template>
 
 <script setup lang="ts">
+import { useSound } from '../composables/useSound'
+
 defineProps<{ score: number }>()
-defineEmits(['restart'])
+const emit = defineEmits(['restart'])
+const { playClick, playGameOver } = useSound()
+
+// Play game over sound when component mounts
+playGameOver()
+
+const handleRestart = () => {
+  playClick()
+  emit('restart')
+}
 </script>
 
 <style scoped lang="scss">
 @import '../assets/variables.scss';
+@import '../assets/animations.scss';
 
 .modal-overlay {
   position: fixed;
