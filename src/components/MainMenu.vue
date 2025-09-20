@@ -2,19 +2,19 @@
   <main class="main-menu animate-fadeIn" role="main" id="main-content" aria-label="Main menu">
     <h1 class="animate-slideInDown" tabindex="0">Welcome to CollaBlind</h1>
     <div class="button-container">
-      <button 
-        class="btn-effect animate-slideInUp" 
-        @click="handleStartGame" 
-        aria-label="Start New Game" 
+      <button
+        class="btn-effect animate-slideInUp"
+        @click="handleStartGame"
+        aria-label="Start New Game"
         tabindex="0"
         style="animation-delay: 0.2s"
       >
         Start New Game
       </button>
-      <button 
-        class="btn-secondary animate-slideInUp" 
-        @click="handleViewScoreboard" 
-        aria-label="Check Scoreboard" 
+      <button
+        class="btn-secondary animate-slideInUp"
+        @click="handleViewScoreboard"
+        aria-label="Check Scoreboard"
         tabindex="0"
         style="animation-delay: 0.4s"
       >
@@ -69,7 +69,7 @@ const handleViewScoreboard = () => {
     color: $color-text-invert;
     text-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
     font-family: $font-main, $font-fallback;
-    
+
     @media (max-width: $breakpoint-mobile) {
       font-size: $font-size-header;
       margin-bottom: 2rem;
@@ -81,7 +81,7 @@ const handleViewScoreboard = () => {
     flex-direction: column;
     gap: 1.5rem;
     align-items: center;
-    
+
     @media (max-width: $breakpoint-mobile) {
       gap: 1rem;
       width: 100%;

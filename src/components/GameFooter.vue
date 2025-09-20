@@ -42,10 +42,7 @@ const { playClick } = useSound()
 
 .game-footer {
   width: 100%;
-  background: linear-gradient(135deg, 
-    rgba($color-bg-overlay, 0.95), 
-    rgba($color-bg-overlay, 0.98)
-  );
+  background: linear-gradient(135deg, rgba($color-bg-overlay, 0.95), rgba($color-bg-overlay, 0.98));
   backdrop-filter: blur(15px);
   border-top: 1px solid rgba($color-accent, 0.2);
   color: $color-text-invert;
@@ -99,17 +96,17 @@ const { playClick } = useSound()
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  
+
   &:hover {
     color: $color-button-primary;
     transform: translateY(-2px) scale(1.1);
     box-shadow: 0 4px 15px rgba($color-button-primary, 0.3);
   }
-  
+
   &:active {
     transform: translateY(0) scale(1.05);
   }
-  
+
   i {
     position: relative;
     z-index: 2;
@@ -124,10 +121,7 @@ const { playClick } = useSound()
   transform: translate(-50%, -50%);
   width: 0;
   height: 0;
-  background: radial-gradient(circle, 
-    rgba($color-button-primary, 0.3) 0%, 
-    transparent 70%
-  );
+  background: radial-gradient(circle, rgba($color-button-primary, 0.3) 0%, transparent 70%);
   border-radius: 50%;
   transition: all 0.3s ease;
   z-index: 1;
@@ -139,12 +133,12 @@ const { playClick } = useSound()
 }
 
 // Specific hover effects for different social platforms
-.social-link[href*="twitter"]:hover {
+.social-link[href*='twitter']:hover {
   color: #1da1f2;
   box-shadow: 0 4px 15px rgba(29, 161, 242, 0.3);
 }
 
-.social-link[href*="instagram"]:hover {
+.social-link[href*='instagram']:hover {
   color: #e4405f;
   box-shadow: 0 4px 15px rgba(228, 64, 95, 0.3);
 }
@@ -154,19 +148,19 @@ const { playClick } = useSound()
     height: 60px;
     padding: 0 1rem;
   }
-  
+
   .footer-label {
     font-size: 1rem;
   }
-  
+
   .social-links {
     gap: 12px;
   }
-  
+
   .social-link {
     font-size: 1.4rem;
     padding: 6px;
-    
+
     &:hover {
       transform: translateY(-1px) scale(1.05);
     }
@@ -178,15 +172,15 @@ const { playClick } = useSound()
     height: 55px;
     padding: 0 0.8rem;
   }
-  
+
   .footer-label {
     font-size: 0.9rem;
   }
-  
+
   .social-links {
     gap: 10px;
   }
-  
+
   .social-link {
     font-size: 1.2rem;
     padding: 4px;
@@ -200,7 +194,7 @@ const { playClick } = useSound()
       transform: none;
     }
   }
-  
+
   .link-glow {
     transition: none;
   }

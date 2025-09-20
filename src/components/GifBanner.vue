@@ -11,12 +11,12 @@
       &#8592;
     </button>
     <div class="gif-container">
-      <img 
-        v-if="gifs.length > 0" 
-        :src="gifSrc" 
-        alt="Animated background GIF" 
-        draggable="false" 
-        class="gif-image animate-scaleIn" 
+      <img
+        v-if="gifs.length > 0"
+        :src="gifSrc"
+        alt="Animated background GIF"
+        draggable="false"
+        class="gif-image animate-scaleIn"
         :key="current"
       />
       <div class="gif-overlay"></div>
@@ -69,10 +69,7 @@ function prevGif() {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, 
-    rgba($color-bg-dark, 0.9), 
-    rgba($color-bg-overlay, 0.9)
-  );
+  background: linear-gradient(135deg, rgba($color-bg-dark, 0.9), rgba($color-bg-overlay, 0.9));
   border-radius: $radius-large;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
   z-index: 2;
@@ -96,7 +93,7 @@ function prevGif() {
   border-radius: $radius-large;
   animation-delay: 0.3s;
   transition: transform 0.3s ease;
-  
+
   &:hover {
     transform: scale(1.02);
   }
@@ -138,7 +135,7 @@ function prevGif() {
   justify-content: center;
   transition: all 0.3s ease;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-  
+
   &:hover {
     background: rgba($color-bg-overlay, 1);
     border-color: $color-button-primary;
@@ -146,15 +143,15 @@ function prevGif() {
     transform: translateY(-50%) scale(1.1);
     box-shadow: 0 6px 20px rgba($color-button-primary, 0.3);
   }
-  
+
   &:active {
     transform: translateY(-50%) scale(0.95);
   }
-  
+
   &.left {
     left: 15px;
   }
-  
+
   &.right {
     right: 15px;
   }
@@ -168,11 +165,11 @@ function prevGif() {
     border-radius: 8px;
     max-height: 300px;
   }
-  
+
   .gif-container {
     border-radius: 8px;
   }
-  
+
   .gif-image {
     aspect-ratio: 16 / 9;
     width: 100%;
@@ -181,25 +178,25 @@ function prevGif() {
     object-fit: cover;
     border-radius: 8px;
   }
-  
+
   .gif-overlay {
     border-radius: 8px;
   }
-  
+
   .arrow {
     font-size: 1.4rem;
     padding: 8px;
     width: 40px;
     height: 40px;
-    
+
     &.left {
       left: 10px;
     }
-    
+
     &.right {
       right: 10px;
     }
-    
+
     &:hover {
       transform: translateY(-50%) scale(1.05);
     }
@@ -211,29 +208,29 @@ function prevGif() {
     max-height: 200px;
     border-radius: 6px;
   }
-  
+
   .gif-container {
     border-radius: 6px;
   }
-  
+
   .gif-image {
     border-radius: 6px;
   }
-  
+
   .gif-overlay {
     border-radius: 6px;
   }
-  
+
   .arrow {
     font-size: 1.2rem;
     padding: 6px;
     width: 36px;
     height: 36px;
-    
+
     &.left {
       left: 8px;
     }
-    
+
     &.right {
       right: 8px;
     }
@@ -247,12 +244,12 @@ function prevGif() {
       transform: none;
     }
   }
-  
+
   .arrow {
     &:hover {
       transform: translateY(-50%);
     }
-    
+
     &:active {
       transform: translateY(-50%);
     }

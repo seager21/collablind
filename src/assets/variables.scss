@@ -69,7 +69,9 @@ $animation-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
 // Transitions
 $transition-all: all $animation-duration-medium $animation-easing;
 $transition-transform: transform $animation-duration-fast $animation-easing;
-$transition-colors: color $animation-duration-fast $animation-easing, background-color $animation-duration-fast $animation-easing;
+$transition-colors:
+  color $animation-duration-fast $animation-easing,
+  background-color $animation-duration-fast $animation-easing;
 
 // Mobile breakpoints (mobile-first approach)
 $breakpoint-small: 480px;
@@ -79,8 +81,8 @@ $breakpoint-desktop: 1200px;
 
 // Touch-optimized dimensions
 $touch-target-min: 44px; // Apple's minimum touch target
-$touch-spacing: 16px;     // Minimum spacing between touch elements
-$swipe-threshold: 50px;   // Minimum distance for swipe gestures
+$touch-spacing: 16px; // Minimum spacing between touch elements
+$swipe-threshold: 50px; // Minimum distance for swipe gestures
 
 // Other
 $transition-fast: 0.2s;

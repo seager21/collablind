@@ -96,11 +96,12 @@ onMounted(() => {
 .loading-screen {
   width: 100vw;
   height: 100vh;
-  background: linear-gradient(135deg, 
-    #1a0033 0%, 
-    #330066 25%, 
-    #4d0099 50%, 
-    #330066 75%, 
+  background: linear-gradient(
+    135deg,
+    #1a0033 0%,
+    #330066 25%,
+    #4d0099 50%,
+    #330066 75%,
     #1a0033 100%
   );
   background-size: 400% 400%;
@@ -114,7 +115,7 @@ onMounted(() => {
   top: 0;
   left: 0;
   overflow: hidden;
-  
+
   &::before {
     content: '';
     position: absolute;
@@ -122,7 +123,7 @@ onMounted(() => {
     left: 0;
     right: 0;
     bottom: 0;
-    background: 
+    background:
       radial-gradient(circle at 20% 80%, rgba($color-button-primary, 0.1) 0%, transparent 50%),
       radial-gradient(circle at 80% 20%, rgba($color-button-secondary, 0.1) 0%, transparent 50%);
     animation: floatingOrbs 10s ease-in-out infinite;
@@ -136,7 +137,7 @@ onMounted(() => {
   font-family: 'Press Start 2P', cursive;
   text-align: center;
   max-width: 90vw;
-  text-shadow: 
+  text-shadow:
     0 0 10px rgba($color-button-primary, 0.6),
     0 0 20px rgba($color-button-primary, 0.4),
     0 0 30px rgba($color-button-primary, 0.2);
@@ -155,12 +156,12 @@ onMounted(() => {
   border-radius: 12px;
   overflow: hidden;
   border: 2px solid $color-button-primary;
-  box-shadow: 
+  box-shadow:
     0 0 20px rgba($color-button-primary, 0.4),
     inset 0 0 10px rgba(0, 0, 0, 0.3);
   position: relative;
   z-index: 2;
-  
+
   &::before {
     content: '';
     position: absolute;
@@ -168,21 +169,17 @@ onMounted(() => {
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(255, 255, 255, 0.2),
-      transparent
-    );
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
     animation: barShimmer 2s ease-in-out infinite;
   }
 }
 
 .loading-bar-inner {
   height: 100%;
-  background: linear-gradient(90deg, 
-    $color-button-primary 0%, 
-    $color-button-secondary 50%, 
+  background: linear-gradient(
+    90deg,
+    $color-button-primary 0%,
+    $color-button-secondary 50%,
     $color-button-primary 100%
   );
   background-size: 200% 100%;
@@ -192,7 +189,7 @@ onMounted(() => {
   box-shadow: 0 0 15px rgba($color-button-primary, 0.6);
   animation: progressGlow 2s ease-in-out infinite;
   position: relative;
-  
+
   &::after {
     content: '';
     position: absolute;
@@ -201,18 +198,14 @@ onMounted(() => {
     transform: translate(-50%, -50%);
     width: 100%;
     height: 50%;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(255, 255, 255, 0.3),
-      transparent
-    );
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
     border-radius: 5px;
   }
 }
 
 @keyframes gradientShift {
-  0%, 100% {
+  0%,
+  100% {
     background-position: 0% 50%;
   }
   50% {
@@ -221,7 +214,8 @@ onMounted(() => {
 }
 
 @keyframes floatingOrbs {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0) rotate(0deg);
   }
   25% {
@@ -236,14 +230,15 @@ onMounted(() => {
 }
 
 @keyframes textPulse {
-  0%, 100% {
-    text-shadow: 
+  0%,
+  100% {
+    text-shadow:
       0 0 10px rgba($color-button-primary, 0.6),
       0 0 20px rgba($color-button-primary, 0.4),
       0 0 30px rgba($color-button-primary, 0.2);
   }
   50% {
-    text-shadow: 
+    text-shadow:
       0 0 15px rgba($color-button-primary, 0.8),
       0 0 30px rgba($color-button-primary, 0.6),
       0 0 45px rgba($color-button-primary, 0.4);
@@ -251,7 +246,8 @@ onMounted(() => {
 }
 
 @keyframes barShimmer {
-  0%, 100% {
+  0%,
+  100% {
     left: -100%;
   }
   50% {
@@ -260,7 +256,8 @@ onMounted(() => {
 }
 
 @keyframes progressGlow {
-  0%, 100% {
+  0%,
+  100% {
     background-position: 0% 50%;
     box-shadow: 0 0 15px rgba($color-button-primary, 0.6);
   }
@@ -276,13 +273,13 @@ onMounted(() => {
     margin-bottom: 2rem;
     padding: 0 1.5rem;
   }
-  
+
   .loading-bar-outer {
     width: 90vw;
     height: 20px;
     border-radius: 10px;
   }
-  
+
   .loading-bar-inner {
     border-radius: 8px;
   }
@@ -294,12 +291,12 @@ onMounted(() => {
     margin-bottom: 1.5rem;
     line-height: 1.3;
   }
-  
+
   .loading-bar-outer {
     height: 16px;
     border-radius: 8px;
   }
-  
+
   .loading-bar-inner {
     border-radius: 6px;
   }
@@ -314,11 +311,11 @@ onMounted(() => {
   .loading-bar-inner {
     animation: none;
   }
-  
+
   .loading-text {
     text-shadow: 0 0 10px rgba($color-button-primary, 0.6);
   }
-  
+
   .loading-bar-inner {
     box-shadow: 0 0 15px rgba($color-button-primary, 0.6);
   }

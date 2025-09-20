@@ -11,7 +11,7 @@
   font-weight: normal;
   overflow-x: hidden;
   position: relative;
-  
+
   /* Performance optimizations */
   transform: translateZ(0);
   backface-visibility: hidden;
@@ -24,14 +24,16 @@ a,
 .green {
   text-decoration: none;
   color: hsla(160, 100%, 37%, 1);
-  transition: color 0.3s ease, background-color 0.3s ease;
+  transition:
+    color 0.3s ease,
+    background-color 0.3s ease;
   padding: 8px 12px;
   border-radius: 4px;
   min-height: 44px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  
+
   /* Touch optimizations */
   -webkit-tap-highlight-color: rgba(160, 100%, 37%, 0.2);
   touch-action: manipulation;
@@ -58,8 +60,9 @@ a,
   #app {
     padding: 0;
   }
-  
-  a, .green {
+
+  a,
+  .green {
     padding: 12px 16px;
     margin: 4px 0;
   }
@@ -80,7 +83,7 @@ a,
     margin: 0 auto;
     padding: 0 2rem;
   }
-  
+
   body {
     display: flex;
     place-items: center;
@@ -89,7 +92,9 @@ a,
 
 /* Performance improvements for animations */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
@@ -99,7 +104,8 @@ a,
 
 /* High contrast mode support */
 @media (prefers-contrast: high) {
-  a, .green {
+  a,
+  .green {
     border: 2px solid currentColor;
   }
 }

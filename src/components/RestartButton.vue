@@ -1,8 +1,8 @@
 <template>
-  <button 
-    @click="handleRestart" 
+  <button
+    @click="handleRestart"
     class="btn-effect btn-primary animate-fadeIn"
-    aria-label="Restart Game" 
+    aria-label="Restart Game"
     tabindex="0"
   >
     <span class="button-text">Restart Game</span>
@@ -52,12 +52,7 @@ button::before {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.1),
-    transparent
-  );
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
   transition: left 0.5s ease;
   z-index: 1;
 }
@@ -76,7 +71,7 @@ button:active {
     padding: 10px 20px;
     margin: 16px auto;
     min-width: 140px;
-    
+
     &:active {
       transform: scale(0.98);
     }

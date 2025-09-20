@@ -94,7 +94,9 @@
     box-shadow: 0 0 5px $color-button-primary-shadow;
   }
   50% {
-    box-shadow: 0 0 20px $color-button-primary-shadow, 0 0 30px $color-button-primary-shadow;
+    box-shadow:
+      0 0 20px $color-button-primary-shadow,
+      0 0 30px $color-button-primary-shadow;
   }
   100% {
     box-shadow: 0 0 5px $color-button-primary-shadow;
@@ -114,24 +116,24 @@
   transition: $transition-all;
   position: relative;
   overflow: hidden;
-  
+
   &:hover {
     background: $color-button-primary-hover;
     transform: scale(1.1);
     box-shadow: 0 0 15px $color-button-primary-shadow;
     animation: magnet $animation-duration-medium $animation-easing alternate infinite;
   }
-  
+
   &:active {
     transform: scale(0.95);
     transition-duration: $animation-duration-fast;
   }
-  
+
   &:focus {
     outline: none;
     box-shadow: 0 0 0 3px rgba($color-button-primary, 0.3);
   }
-  
+
   // Ripple effect
   &::before {
     content: '';
@@ -142,10 +144,12 @@
     height: 0;
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.5);
-    transition: width $animation-duration-medium, height $animation-duration-medium;
+    transition:
+      width $animation-duration-medium,
+      height $animation-duration-medium;
     transform: translate(-50%, -50%);
   }
-  
+
   &:active::before {
     width: 300px;
     height: 300px;
@@ -155,7 +159,7 @@
 .btn-secondary {
   @extend .btn-effect;
   background: $color-button-secondary;
-  
+
   &:hover {
     background: $color-button-secondary-hover;
     box-shadow: 0 0 15px rgba($color-button-secondary, 0.6);
@@ -165,7 +169,9 @@
 // Page transition classes
 .page-enter-active,
 .page-leave-active {
-  transition: opacity $animation-duration-medium, transform $animation-duration-medium;
+  transition:
+    opacity $animation-duration-medium,
+    transform $animation-duration-medium;
 }
 
 .page-enter-from {
@@ -227,11 +233,11 @@
   .btn-effect {
     padding: 0.6rem 1.2rem;
     font-size: $font-size-button-mobile;
-    
+
     &:hover {
       transform: scale(1.05); // Reduced scale for mobile
     }
-    
+
     // Disable hover animations on touch devices
     @media (hover: none) {
       &:hover {
@@ -241,13 +247,13 @@
       }
     }
   }
-  
+
   // Faster animations on mobile for better performance
   .page-enter-active,
   .page-leave-active {
     transition-duration: $animation-duration-fast;
   }
-  
+
   .modal-enter-active {
     animation-duration: $animation-duration-medium;
   }
@@ -263,7 +269,7 @@
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-  
+
   .btn-effect:hover {
     animation: none;
   }

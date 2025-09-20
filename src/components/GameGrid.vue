@@ -44,7 +44,7 @@ const generateColors = () => {
 
 const checkColor = (index: number) => {
   tapFeedback() // Haptic feedback for touch
-  
+
   if (colors.value[index] === differentColor.value) {
     playCorrect()
     successFeedback() // Success haptic pattern
@@ -89,11 +89,13 @@ function lightenColor(rgb: string, percent: number) {
   aspect-ratio: 1 / 1;
   border-radius: $radius-base;
   cursor: pointer;
-  transition: transform $animation-duration-fast $animation-easing, box-shadow $animation-duration-fast;
+  transition:
+    transform $animation-duration-fast $animation-easing,
+    box-shadow $animation-duration-fast;
   -webkit-tap-highlight-color: transparent;
   outline: none;
   user-select: none;
-  
+
   &.grid-item-enter {
     animation: slideInUp $animation-duration-fast $animation-easing;
     animation-delay: calc(var(--index) * 0.02s);
