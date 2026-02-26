@@ -38,6 +38,7 @@ Each technology was chosen for its performance, developer experience, and abilit
 ## 🚀 Getting Started
 
 ### Prerequisites
+
 - **Node.js** (v16 or higher)
 - **npm** or **yarn** package manager
 
@@ -64,6 +65,7 @@ npm run build
 ```
 
 Creates an optimized production build with:
+
 - Type checking via TypeScript
 - Code minification for smaller bundle sizes
 - Asset optimization
@@ -84,6 +86,7 @@ Runs ESLint to check code quality and enforce consistent coding standards. This 
 ### Recommended IDE Setup
 
 We recommend using **Visual Studio Code** with the following extensions:
+
 - [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) - Official Vue 3 language support
 - [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) - Real-time linting
 - [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) - Code formatting
@@ -121,17 +124,20 @@ public/                 # Static assets and favicon
 ## 🎨 Key Implementation Details
 
 ### Performance Optimization
+
 - Lazy loading of images and components for faster initial load
 - Efficient state management with Vue 3's Composition API
 - CSS animations using `transform` and `opacity` for GPU acceleration
 - Minimal bundle size through tree-shaking and code splitting
 
 ### Audio System
+
 - Contextual sound effects for correct/incorrect selections
 - Mute/unmute functionality accessible from game controls
 - Optimized audio files for quick playback without latency
 
 ### Mobile Experience
+
 - Touch-optimized interface with appropriate tap targets
 - Responsive image scaling for various screen sizes
 - Viewport-aware layout adjustments
