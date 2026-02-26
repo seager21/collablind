@@ -25,6 +25,17 @@
           <i class="fab fa-instagram" aria-hidden="true"></i>
           <span class="link-glow"></span>
         </a>
+        <a
+          href="https://github.com/seager21/collablind"
+          target="_blank"
+          rel="noopener"
+          aria-label="GitHub repository"
+          class="social-link"
+          @click="playClick"
+        >
+          <i class="fab fa-github" aria-hidden="true"></i>
+          <span class="link-glow"></span>
+        </a>
       </nav>
     </div>
   </footer>
@@ -141,6 +152,11 @@ const { playClick } = useSound()
 .social-link[href*='instagram']:hover {
   color: #e4405f;
   box-shadow: 0 4px 15px rgba(228, 64, 95, 0.3);
+}
+
+.social-link[href*='github']:hover {
+  color: #ffffff;
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
 }
 
 @media (max-width: $breakpoint-mobile) {
