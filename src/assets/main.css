@@ -79,7 +79,6 @@ a,
 /* Desktop layout */
 @media (min-width: 1024px) {
   #app {
-    max-width: 1280px;
     margin: 0 auto;
     padding: 0 2rem;
   }

@@ -322,7 +322,7 @@ onUnmounted(() => {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 100vw;
+  width: 100%;
   height: calc(100vh - 120px); /* 60px header + 60px footer */
   margin-top: 60px;
   margin-bottom: 60px;

@@ -56,7 +56,7 @@ This installs all required dependencies including Vue 3, TypeScript, Vite, SCSS,
 npm run dev
 ```
 
-Launches the development server with hot module reloading (HMR) for instant feedback. Open your browser to `http://localhost:5173` and start developing. Any changes you make to the code will automatically refresh in the browser.
+Launches the development server with hot module reloading (HMR) for instant feedback. Open your browser to `http://localhost:32910` and start developing. Any changes you make to the code will automatically refresh in the browser.
 
 ### Build for Production
 
